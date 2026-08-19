@@ -1,0 +1,126 @@
+
+ <!-- Vista Puerta Motorizada -->
+<div class="device-container fade-in">
+
+  <!-- Header -->
+  <div class="device-header">
+    <button class="dash-icon-btn" id="back-to-dashboard">
+      <span class="material-symbols-outlined">arrow_back</span>
+    </button>
+    <h2 id="device-name">Puerta Motorizada</h2>
+    <div class="device-header-actions">
+      <div class="device-status-badge" id="device-status-badge">
+        <span class="status-dot online"></span>
+        <span>En línea</span>
+      </div>
+      <button class="dash-icon-btn" id="device-menu-btn">
+        <span class="material-symbols-outlined">more_vert</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Contenido -->
+  <div class="device-body">
+    <!-- Botones de control - DOS PUERTAS -->
+    <div class="door-card">
+      <div class="door-card-header">
+        <span class="door-card-icon">🚗</span>
+        <span class="door-card-title" id="door1-title">Puerta 1</span>
+        <button class="btn-edit-name" id="edit-door1">✏️</button>
+        <span class="door-card-status" id="door1-status-badge">Cerrada</span>
+      </div>
+      <button class="btn-door-action" id="btn-door1">
+        <span class="material-symbols-outlined" id="door1-icon">lock</span>
+        <span id="door1-text">Abrir Puerta</span>
+      </button>
+    </div>
+
+    <div class="door-card">
+      <div class="door-card-header">
+        <span class="door-card-icon">🚗</span>
+        <span class="door-card-title" id="door2-title">Puerta 2</span>
+        <button class="btn-edit-name" id="edit-door2">✏️</button>
+        <span class="door-card-status" id="door2-status-badge">Cerrada</span>
+      </div>
+      <button class="btn-door-action" id="btn-door2">
+        <span class="material-symbols-outlined" id="door2-icon">lock</span>
+        <span id="door2-text">Abrir Puerta</span>
+      </button>
+    </div>
+
+    <!-- Historial -->
+    <div class="history-section">
+      <h4 class="history-title">Historial de Eventos</h4>
+      <div id="history-list" class="history-list">
+        <p style="color:var(--text-light);text-align:center;">Cargando...</p>
+      </div>
+    </div>
+
+    <!-- Modal de Configuración -->
+    <div class="modal-overlay" id="device-settings-modal" style="display:none;">
+      <div class="modal-content">
+        <h3>Configuración</h3>
+
+        <button class="modal-btn" id="unsubscribe-btn">
+          <span class="material-symbols-outlined">notifications_off</span>
+          Quitar notificaciones de este sitio
+        </button>
+
+        <div class="modal-input-group">
+          <label>Nombre del dispositivo</label>
+          <input type="text" id="edit-device-name" class="modal-input">
+        </div>
+
+        <div class="device-info-mini">
+          <p><strong>Serial:</strong> <span id="info-serial">--</span></p>
+          <p><strong>Tipo:</strong> Puerta Motorizada</p>
+          <p><strong>Rol:</strong> <span id="info-role">--</span></p>
+        </div>
+
+        <button class="modal-btn primary" id="save-device-name">
+          <span class="material-symbols-outlined">save</span>
+          Guardar Cambios
+        </button>
+        <button class="modal-btn" id="share-device-btn">
+          <span class="material-symbols-outlined">share</span>
+          Compartir Sitio
+        </button>
+        <button class="modal-btn danger" id="delete-device-btn">
+          <span class="material-symbols-outlined">delete_forever</span>
+          Eliminar Dispositivo
+        </button>
+        <button class="modal-btn cancel" id="close-settings-modal">Cancelar</button>
+      </div>
+    </div>
+
+    <!-- Modal Compartir -->
+    <div class="modal-overlay" id="share-modal" style="display:none;">
+      <div class="modal-content">
+        <h3>Compartir Sitio</h3>
+
+        <!-- Lista de personas compartidas -->
+        <div id="shared-list" style="margin-bottom:15px;max-height:200px;overflow-y:auto;">
+          <p style="color:var(--text-light);text-align:center;">Cargando...</p>
+        </div>
+
+        <!-- Agregar nuevo -->
+        <div style="border-top:1px solid var(--border-color);padding-top:12px;margin-top:5px;">
+          <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:8px;font-weight:600;">
+            Agregar persona
+          </p>
+          <input type="email" id="share-email" placeholder="correo@ejemplo.com" class="modal-input">
+          <select id="share-role" class="modal-input">
+            <option value="INV">Invitado (solo ver)</option>
+            <option value="ADM">Administrador (control total)</option>
+          </select>
+          <button class="modal-btn primary" id="confirm-share">
+            <span class="material-symbols-outlined">person_add</span>
+            Compartir
+          </button>
+        </div>
+
+        <button class="modal-btn cancel" id="close-share-modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

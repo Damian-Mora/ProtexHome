@@ -1,0 +1,79 @@
+<!-- Dashboard -->
+<div class="dash-container fade-in">
+
+    <!-- HEADER -->
+    <div class="dash-header">
+        <button class="dash-icon-btn" id="menu-btn">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+        <h2>Mis sitios</h2>
+        <div class="dash-header-actions">
+            <button class="dash-icon-btn" id="notifications-btn">
+                <span class="material-symbols-outlined">notifications</span>
+            </button>
+            <button class="dash-icon-btn" id="profile-btn">
+                <span class="material-symbols-outlined">person</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- BUSCADOR -->
+    <div class="search-bar">
+        <span class="material-symbols-outlined search-icon">search</span>
+        <input type="text" style="display:none;" autocomplete="off">
+        <input type="password" style="display:none;" autocomplete="off">
+        <input type="search" id="search-input" placeholder="Buscar sitio..." class="search-input" autocomplete="off">
+    </div>
+
+    <!-- LISTA DE SITIOS -->
+    <div class="sites-list" id="sites-list">
+        <!-- Se llena dinámicamente -->
+    </div>
+
+    <!-- BOTÓN AGREGAR -->
+    <div class="add-site-container">
+        <button class="btn-add-site" id="add-site-btn">
+            <span class="material-symbols-outlined">add</span>
+            Agregar nuevo sitio
+        </button>
+    </div>
+
+    <!-- Modal Perfil -->
+    <div class="modal-overlay" id="profile-modal" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-profile">
+                <div class="modal-avatar">
+                    <span class="material-symbols-outlined">person</span>
+                </div>
+                <h3 id="profile-name"></h3>
+                <p id="profile-email"></p>
+            </div>
+            <button class="modal-btn" id="logout-btn">
+                <span class="material-symbols-outlined">logout</span>
+                Cerrar sesión
+            </button>
+            <button class="modal-btn danger" id="delete-account-btn">
+                <span class="material-symbols-outlined">delete_forever</span>
+                Eliminar cuenta
+            </button>
+            <button class="modal-btn cancel" id="close-profile-modal">Cancelar</button>
+        </div>
+    </div>
+
+    <!-- Modal Agregar Sitio -->
+    <div class="modal-overlay" id="add-modal" style="display:none;">
+        <div class="modal-content">
+            <h3>Agregar nuevo sitio</h3>
+            <input type="text" id="site-serial" placeholder="Serial (ej: SH-0001)" class="modal-input">
+            <input type="text" id="site-name" placeholder="Nombre del sitio" class="modal-input">
+            <input type="text" id="site-location" placeholder="Ubicación (ej: Palmira)" class="modal-input">
+            <input type="password" id="site-password" placeholder="Clave de acceso" class="modal-input">
+            <select id="site-role" class="modal-input">
+                <option value="ADM">Administrador</option>
+                <option value="INV">Invitado</option>
+            </select>
+            <button class="modal-btn primary" id="save-site">Guardar</button>
+            <button class="modal-btn cancel" id="close-add-modal">Cancelar</button>
+        </div>
+    </div>
+</div>
