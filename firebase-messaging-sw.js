@@ -17,13 +17,34 @@ const messaging = firebase.messaging();
 messaging.onBackgroundMessage((payload) => {
     console.log('📩 Notificación en segundo plano:', payload);
 
-    const notificationTitle = payload.notification?.title || 'ProtexHome';
+    const data = payload.data || {};
+    const serial = data.S || 'ProtexHome';
+    const estado = data.E || '';
+    const nombre = data.N || 'Usuario';
+    const cuerpo = `${getEventText(estado)} - ${nombre}`;
+
     const notificationOptions = {
-        body: payload.notification?.body || 'Nueva alerta',
-        icon: '/assets/icon-512.png',
-        badge: '/assets/icon-512.png',
-        data: payload.data || {}
+        body: cuerpo,
+        icon: './assets/icon-512.png',
+        badge: './assets/icon-512.png',
+        data: data
     };
 
-    self.registration.showNotification(notificationTitle, notificationOptions);
+    self.registration.showNotification(`Alerta en ${serial}`, notificationOptions);
 });
+
+function getEventText(eventCode) {
+    const events = {
+        1: 'Puerta abierta',
+        2: 'Puerta cerrada',
+        3: 'Alarma activada',
+        4: 'Alarma desactivada',
+        5: 'Acceso permitido',
+        6: 'Acceso denegado',
+        7: 'Dispositivo conectado',
+        8: 'Dispositivo desconectado',
+        21: 'Comando: Abrir',
+        22: 'Comando: Cerrar'
+    };
+    return events[eventCode] || 'Evento ' + eventCode;
+}
