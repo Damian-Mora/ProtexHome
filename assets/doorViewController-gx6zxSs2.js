@@ -1,4 +1,4 @@
-import{D as j,H as F}from"./historyController-WS-GNibk.js";import{s as c,r as w,g as D,a as z,b as W,u as Z,c as G,d as N,e as Q}from"./index-Rw0hZkkS.js";const J=`\r
+import{D as j,H as F}from"./historyController-DY3G_hr2.js";import{s as c,r as w,g as D,a as z,b as W,u as Z,c as G,d as N,e as Q}from"./index-DcGEaaWs.js";const J=`\r
  <!-- Vista Puerta Motorizada -->\r
 <div class="device-container fade-in">\r
 \r
