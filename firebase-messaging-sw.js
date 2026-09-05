@@ -14,37 +14,156 @@ firebase.initializeApp({
 
 const messaging = firebase.messaging();
 
+// ============================================================
+// FUNCIÓN DE FORMATEO (idéntica a la de notifications.js)
+// ============================================================
+function formatEventMessage(payload) {
+    const { A: partition, D: zoneOrUser, E: eventType, F: date, N: name, S: serial } = payload;
+    const zonaNum = String(zoneOrUser || 0).padStart(2, '0');
+    const nombre = name || 'Usuario';
+    const serialDisplay = serial || '';
+
+    let title = `📢 ${serialDisplay}`;
+    let body = '';
+    let icon = '🔔';
+    let color = '#6b7280';
+
+    switch (Number(eventType)) {
+        case 1:
+            title = `🚨 Alarma en Zona ${zonaNum}`;
+            body = `Partición ${partition} • ${nombre}`;
+            icon = '🚨';
+            color = '#dc2626';
+            break;
+        case 2:
+            title = `✅ Restauración en Zona ${zonaNum}`;
+            body = `Partición ${partition} • ${nombre}`;
+            icon = '✅';
+            color = '#16a34a';
+            break;
+        case 3: {
+            const fallaMap = {
+                1: 'Batería baja',
+                2: 'Falla de sirena',
+                3: 'Falla de línea telefónica',
+                4: 'Falla de comunicación'
+            };
+            const fallaDesc = fallaMap[zoneOrUser] || `Falla (código ${zoneOrUser})`;
+            title = `⚠️ Falla: ${fallaDesc}`;
+            body = `Partición ${partition}`;
+            icon = '⚠️';
+            color = '#d97706';
+            break;
+        }
+        case 4: {
+            const restFallaMap = {
+                1: 'Batería baja restaurada',
+                2: 'Sirena restaurada',
+                3: 'Línea telefónica restaurada',
+                4: 'Comunicación restaurada'
+            };
+            const restDesc = restFallaMap[zoneOrUser] || `Falla restaurada (código ${zoneOrUser})`;
+            title = `🔄 ${restDesc}`;
+            body = `Partición ${partition}`;
+            icon = '🔄';
+            color = '#a16207';
+            break;
+        }
+        case 5:
+            title = `🔓 Apertura por usuario ${zonaNum}`;
+            body = `${nombre} • Partición ${partition}`;
+            icon = '🔓';
+            color = '#2563eb';
+            break;
+        case 6:
+            title = `🔒 Cierre por usuario ${zonaNum}`;
+            body = `${nombre} • Partición ${partition}`;
+            icon = '🔒';
+            color = '#7c3aed';
+            break;
+        case 7: {
+            const tipoMap = {
+                0: 'Fuego',
+                1: 'Alarma médica',
+                2: 'Pánico de teclado'
+            };
+            const tipo = tipoMap[zoneOrUser] || `Alarma (código ${zoneOrUser})`;
+            title = `🔥 ${tipo}`;
+            body = `Partición ${partition}`;
+            icon = '🔥';
+            color = '#b91c1c';
+            break;
+        }
+        default:
+            title = `📩 Evento ${eventType}`;
+            body = `Partición ${partition} • ${nombre}`;
+            icon = '📩';
+            color = '#6b7280';
+    }
+
+    if (partition == 9) {
+        body = body.replace('Partición', 'Global');
+    }
+
+    return { title, body, icon, color };
+}
+
+// ============================================================
+// MANEJAR NOTIFICACIONES EN SEGUNDO PLANO
+// ============================================================
 messaging.onBackgroundMessage((payload) => {
-    console.log('📩 Notificación en segundo plano:', payload);
+    console.log('📩 Notificación en segundo plano (SW):', payload);
 
-    const data = payload.data || {};
-    const serial = data.S || 'ProtexHome';
-    const estado = data.E || '';
-    const nombre = data.N || 'Usuario';
-    const cuerpo = `${getEventText(estado)} - ${nombre}`;
+    // Extraer datos del payload
+    const eventData = payload.data || {};
 
-    const notificationOptions = {
-        body: cuerpo,
-        icon: './assets/icon-512.png',
-        badge: './assets/icon-512.png',
-        data: data
+    // Si no hay datos estructurados, mostrar el mensaje tal cual
+    if (eventData.E === undefined) {
+        const notificationTitle = payload.notification?.title || 'ProtexHome';
+        const notificationBody = payload.notification?.body || 'Nuevo evento';
+        const options = {
+            body: notificationBody,
+            icon: '/assets/icon-512.png',
+            badge: '/assets/icon-512.png',
+            requireInteraction: true,
+        };
+        return self.registration.showNotification(notificationTitle, options);
+    }
+
+    // Formatear el evento con la misma función
+    const { title, body, icon, color } = formatEventMessage(eventData);
+
+    const options = {
+        body: body,
+        icon: '/assets/icon-512.png',
+        badge: '/assets/icon-512.png',
+        tag: `event-${eventData.S || 'unknown'}-${eventData.D}-${Date.now()}`,
+        requireInteraction: true,
+        data: { payload: eventData }
     };
 
-    self.registration.showNotification(`Alerta en ${serial}`, notificationOptions);
+    // Algunos navegadores soportan color en la notificación
+    if (Notification.prototype.hasOwnProperty('color')) {
+        options.color = color;
+    }
+
+    self.registration.showNotification(title, options);
 });
 
-function getEventText(eventCode) {
-    const events = {
-        1: 'Puerta abierta',
-        2: 'Puerta cerrada',
-        3: 'Alarma activada',
-        4: 'Alarma desactivada',
-        5: 'Acceso permitido',
-        6: 'Acceso denegado',
-        7: 'Dispositivo conectado',
-        8: 'Dispositivo desconectado',
-        21: 'Comando: Abrir',
-        22: 'Comando: Cerrar'
-    };
-    return events[eventCode] || 'Evento ' + eventCode;
-}
+// ============================================================
+// MANEJAR CLIC EN NOTIFICACIÓN (cuando la app está cerrada)
+// ============================================================
+self.addEventListener('notificationclick', (event) => {
+    event.notification.close();
+    const payload = event.notification.data?.payload;
+    if (payload) {
+        console.log('🔔 Usuario hizo clic en la notificación (SW):', payload);
+        // Abrir la aplicación (puedes pasar el serial como parámetro)
+        const urlToOpen = new URL('/', self.location.origin).href;
+        // Opcional: redirigir a la vista DSC del serial
+        // if (payload.S) { urlToOpen = new URL(`/?serial=${payload.S}`, self.location.origin).href; }
+        event.waitUntil(
+            clients.openWindow(urlToOpen)
+        );
+    }
+});
