@@ -123,8 +123,8 @@ messaging.onBackgroundMessage((payload) => {
         const notificationBody = payload.notification?.body || 'Nuevo evento';
         const options = {
             body: notificationBody,
-            icon: '/assets/icon-512.png',
-            badge: '/assets/icon-512.png',
+            icon: './assets/icon-512.png',
+            badge: './assets/icon-512.png',
             requireInteraction: true,
         };
         return self.registration.showNotification(notificationTitle, options);
@@ -135,8 +135,8 @@ messaging.onBackgroundMessage((payload) => {
 
     const options = {
         body: body,
-        icon: '/assets/icon-512.png',
-        badge: '/assets/icon-512.png',
+        icon: './assets/icon-512.png',
+        badge: './assets/icon-512.png',
         tag: `event-${eventData.S || 'unknown'}-${eventData.D}-${Date.now()}`,
         requireInteraction: true,
         data: { payload: eventData }
