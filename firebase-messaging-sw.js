@@ -1,6 +1,6 @@
 // public/firebase-messaging-sw.js
-importScripts('https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js');
-importScripts('https://www.gstatic.com/firebasejs/10.7.1/firebase-messaging-compat.js');
+importScripts('https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js');
+importScripts('https://www.gstatic.com/firebasejs/10.13.2/firebase-messaging-compat.js');
 
 firebase.initializeApp({
     apiKey: "AIzaSyDt4bPEKjStdFY-i5VLz-yx79wGModi9GM",
@@ -14,9 +14,6 @@ firebase.initializeApp({
 
 const messaging = firebase.messaging();
 
-// ============================================================
-// FUNCIÓN DE FORMATEO (idéntica a la de notifications.js)
-// ============================================================
 function formatEventMessage(payload) {
     const { A: partition, D: zoneOrUser, E: eventType, N: name, S: serial } = payload;
     const zonaNum = String(zoneOrUser || 0).padStart(2, '0');
@@ -108,89 +105,67 @@ function formatEventMessage(payload) {
     return { title, body, icon, color };
 }
 
-// ============================================================
-// MANEJAR NOTIFICACIONES EN SEGUNDO PLANO
-// ============================================================
+// Manejador de mensajes en segundo plano
 messaging.onBackgroundMessage((payload) => {
-    console.log('📩 SW: Notificación en segundo plano:', payload);
+    console.log('📩 SW: Mensaje recibido:', payload);
 
     const eventData = payload.data || {};
+    let title, body, options;
 
-    // Si no hay datos estructurados, mostrar mensaje genérico
-    if (eventData.E === undefined) {
-        const notificationTitle = payload.notification?.title || 'ProtexHome';
-        const notificationBody = payload.notification?.body || 'Nuevo evento';
-        const options = {
-            body: notificationBody,
-            icon: '/assets/icon-512.png',
-            badge: '/assets/icon-512.png',
-            requireInteraction: true,
-            sound: '/assets/alarm.mp3' // Intentar sonido
-        };
-        return self.registration.showNotification(notificationTitle, options);
-    }
-
-    // Formatear el evento
-    const { title, body, icon, color } = formatEventMessage(eventData);
-
-    const options = {
-        body: body,
-        icon: '/assets/icon-512.png',
-        badge: '/assets/icon-512.png',
-        tag: `event-${eventData.S || 'unknown'}-${eventData.D}-${Date.now()}`,
-        requireInteraction: true,
-        data: { payload: eventData },
-        sound: '/assets/alarm.mp3' // Intentar sonido
-    };
-
-    // Algunos navegadores soportan color
-    if (Notification.prototype.hasOwnProperty('color')) {
-        options.color = color;
-    }
-
-    self.registration.showNotification(title, options);
-});
-
-// ============================================================
-// MANEJAR CLIC EN NOTIFICACIÓN
-// ============================================================
-self.addEventListener('notificationclick', (event) => {
-    event.notification.close();
-    const payload = event.notification.data?.payload;
-    if (payload) {
-        console.log('🔔 SW: Usuario hizo clic en la notificación:', payload);
-        const urlToOpen = new URL('/', self.location.origin).href;
-        // Redirigir a la vista del serial
-        if (payload.S) {
-            const url = new URL(`/?serial=${payload.S}`, self.location.origin);
-            urlToOpen = url.href;
-        }
-        event.waitUntil(
-            clients.openWindow(urlToOpen)
-        );
-    }
-});
-
-// ============================================================
-// ESCUCHAR MENSAJES DE LA PÁGINA (para mostrar notificaciones forzadas)
-// ============================================================
-self.addEventListener('message', (event) => {
-    if (event.data && event.data.type === 'SHOW_NOTIFICATION') {
-        console.log('📩 SW: Recibido mensaje para mostrar notificación:', event.data.payload);
-        const payload = event.data.payload;
-        const { title, body, icon, color } = formatEventMessage(payload);
-        const options = {
+    if (eventData.E !== undefined) {
+        const formatted = formatEventMessage(eventData);
+        title = formatted.title;
+        body = formatted.body;
+        options = {
             body: body,
-            icon: '/assets/icon-512.png',
-            badge: '/assets/icon-512.png',
-            tag: `event-${payload.S || 'unknown'}-${payload.D}-${Date.now()}`,
+            icon: '/ProtexHome/assets/icon-512.png',  // Ruta absoluta
+            badge: '/ProtexHome/assets/icon-512.png',
+            tag: `event-${eventData.S || 'unknown'}-${Date.now()}`,
             requireInteraction: true,
-            data: { payload },
-            sound: '/assets/alarm.mp3'
+            data: { payload: eventData },
+            // sonido: '/ProtexHome/assets/alarm.mp3'  // Comentado porque no es soportado
         };
         if (Notification.prototype.hasOwnProperty('color')) {
-            options.color = color;
+            options.color = formatted.color;
         }
-        self.registration.showNotification(title, options);
+    } else {
+        title = payload.notification?.title || 'ProtexHome';
+        body = payload.notification?.body || 'Nuevo evento';
+        options = {
+            body: body,
+            icon: '/ProtexHome/assets/icon-512.png',
+            badge: '/ProtexHome/assets/icon-512.png',
+            requireInteraction: true,
+        };
     }
+
+    console.log(`🔔 SW: Intentando mostrar notificación: "${title}" - "${body}"`);
+
+    self.registration.showNotification(title, options)
+        .then(() => console.log('✅ SW: Notificación mostrada correctamente'))
+        .catch(err => console.error('❌ SW: Error al mostrar notificación:', err));
+});
+
+self.addEventListener('notificationclick', (event) => {
+    console.log('🔔 SW: Clic en notificación');
+    event.notification.close();
+    const payload = event.notification.data?.payload;
+    let url = '/ProtexHome/';
+    if (payload && payload.S) {
+        url = `/ProtexHome/?serial=${payload.S}`;
+    }
+    event.waitUntil(
+        clients.openWindow(url)
+    );
+});
+
+// Activar inmediatamente
+self.addEventListener('install', (event) => {
+    console.log('✅ SW: Instalado');
+    self.skipWaiting();
+});
+
+self.addEventListener('activate', (event) => {
+    console.log('✅ SW: Activado');
+    event.waitUntil(clients.claim());
 });
