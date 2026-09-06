@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./doorViewController-DrCRrhS0.js","./deviceController-BjHR25zs.js","./alarmDscViewController-BGLbVajK.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["./doorViewController-CGxel0xW.js","./deviceController-DKY4RjEZ.js","./alarmDscViewController-D1M4Y5VW.js"])))=>i.map(i=>d[i]);
 (function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const s of document.querySelectorAll('link[rel="modulepreload"]'))i(s);new MutationObserver(s=>{for(const r of s)if(r.type==="childList")for(const o of r.addedNodes)o.tagName==="LINK"&&o.rel==="modulepreload"&&i(o)}).observe(document,{childList:!0,subtree:!0});function t(s){const r={};return s.integrity&&(r.integrity=s.integrity),s.referrerPolicy&&(r.referrerPolicy=s.referrerPolicy),s.crossOrigin==="use-credentials"?r.credentials="include":s.crossOrigin==="anonymous"?r.credentials="omit":r.credentials="same-origin",r}function i(s){if(s.ep)return;s.ep=!0;const r=t(s);fetch(s.href,r)}})();const tu="modulepreload",nu=function(n,e){return new URL(n,e).href},Nr={},fn=function(e,t,i){let s=Promise.resolve();if(t&&t.length>0){const o=document.getElementsByTagName("link"),a=document.querySelector("meta[property=csp-nonce]"),c=(a==null?void 0:a.nonce)||(a==null?void 0:a.getAttribute("nonce"));s=Promise.allSettled(t.map(l=>{if(l=nu(l,i),l in Nr)return;Nr[l]=!0;const u=l.endsWith(".css"),d=u?'[rel="stylesheet"]':"";if(!!i)for(let g=o.length-1;g>=0;g--){const v=o[g];if(v.href===l&&(!u||v.rel==="stylesheet"))return}else if(document.querySelector(`link[href="${l}"]${d}`))return;const f=document.createElement("link");if(f.rel=u?"stylesheet":tu,u||(f.as="script"),f.crossOrigin="",f.href=l,c&&f.setAttribute("nonce",c),document.head.appendChild(f),u)return new Promise((g,v)=>{f.addEventListener("load",g),f.addEventListener("error",()=>v(new Error(`Unable to preload CSS for ${l}`)))})}))}function r(o){const a=new Event("vite:preloadError",{cancelable:!0});if(a.payload=o,window.dispatchEvent(a),!a.defaultPrevented)throw o}return s.then(o=>{for(const a of o||[])a.status==="rejected"&&r(a.reason);return e().catch(r)})},iu=`<!-- Login -->\r
 <form id="login-form" class="auth-form" novalidate>\r
   <div class="input-group">\r
@@ -3796,66 +3796,66 @@ FIREBASE: `))}restoreState_(){this.tryAuth(),this.tryAppCheck();for(const e of t
                 `).join("")}
                 <style>@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}</style>
             `);const s=await this.dashboardController.loadSites(),r=localStorage.getItem("fcm_token"),o=Notification.permission==="granted";if(r&&o)console.log("✅ Ya hay token y permiso, sincronizando suscripciones..."),await ea(e.uid,s.map(a=>a.serial));else{console.log("🔔 Solicitando permiso de notificaciones...");const a=await Ql();a.success?(console.log("✅ Token obtenido, sincronizando suscripciones..."),await ea(e.uid,s.map(c=>c.serial))):console.warn("⚠️ No se pudo obtener permiso para notificaciones:",a.error)}this.dashboardController.renderSites(s),this.dashboardController.setupSearch(),this._initDashboardEvents(e),await this.loadAndPingModules(e)}_initDashboardEvents(e){var s,r,o,a,c,l,u;const t=this.dashboardController;(s=document.getElementById("profile-btn"))==null||s.addEventListener("click",()=>{document.getElementById("profile-name").textContent=e.name||e.email,document.getElementById("profile-email").textContent=e.email,document.getElementById("profile-modal").style.display="flex"}),(r=document.getElementById("close-profile-modal"))==null||r.addEventListener("click",()=>{document.getElementById("profile-modal").style.display="none"}),(o=document.getElementById("logout-btn"))==null||o.addEventListener("click",async()=>{confirm("¿Cerrar sesión?")&&(Rt(),ta(),await t.logout())}),(a=document.getElementById("delete-account-btn"))==null||a.addEventListener("click",async()=>{if(confirm("¿Eliminar cuenta permanentemente?")&&confirm("¿Totalmente seguro?")){Rt(),ta();const{deleteAccount:d}=await fn(async()=>{const{deleteAccount:h}=await Promise.resolve().then(()=>Ho);return{deleteAccount:h}},void 0,import.meta.url);await d(e.uid)}}),(c=document.getElementById("add-site-btn"))==null||c.addEventListener("click",()=>{document.getElementById("add-modal").style.display="flex"}),(l=document.getElementById("close-add-modal"))==null||l.addEventListener("click",()=>{document.getElementById("add-modal").style.display="none"}),(u=document.getElementById("save-site"))==null||u.addEventListener("click",async()=>{const d=document.getElementById("site-serial").value,h=document.getElementById("site-name").value,f=document.getElementById("site-location").value,g=document.getElementById("site-password").value,v=document.getElementById("site-role").value;if(!d||!h)return alert("Serial y nombre son obligatorios");if(await t.addSite(d,h,f,g,v)){document.getElementById("add-modal").style.display="none";const Y=await t.loadSites();t.renderSites(Y),await wy(e.uid,d)}});const i=document.getElementById("sites-list");i&&(i.onclick=d=>{const h=d.target.closest(".site-card");if(!h)return;if(!navigator.onLine){alert("⚠️ Sin conexión a internet");return}const f=h.dataset.serial,g=h.dataset.type||"1";this.openDeviceView(f,g)}),document.querySelectorAll(".modal-overlay").forEach(d=>{d.addEventListener("click",function(h){h.target===this&&(this.style.display="none")})}),window.addEventListener("beforeunload",()=>{t&&(t.disconnectAllModules(),t.stopHealthCheck())})}showLogin(){console.log("📝 Mostrando login...");const e=document.getElementById("main-content");e&&(e.innerHTML=`
-      <div class="auth-container">
-        <div class="auth-background">
-          <div class="bg-circle bg-circle-1"></div>
-          <div class="bg-circle bg-circle-2"></div>
-          <div class="bg-circle bg-circle-3"></div>
-        </div>
-        <div class="auth-card">
-          <div class="auth-header">
-            <div class="auth-logo">
-              <span class="material-symbols-outlined">shield_lock</span>
+            <div class="auth-container">
+                <div class="auth-background">
+                    <div class="bg-circle bg-circle-1"></div>
+                    <div class="bg-circle bg-circle-2"></div>
+                    <div class="bg-circle bg-circle-3"></div>
+                </div>
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <div class="auth-logo">
+                            <span class="material-symbols-outlined">shield_lock</span>
+                        </div>
+                        <h1>ProtexHome</h1>
+                        <p>Protección Inteligente</p>
+                    </div>
+                    <div id="auth-views" class="auth-views">
+                        <div id="login-view" class="auth-view active"></div>
+                        <div id="register-view" class="auth-view"></div>
+                        <div id="forgot-view" class="auth-view"></div>
+                        <div id="verify-view" class="auth-view"></div>
+                    </div>
+                </div>
             </div>
-            <h1>ProtexHome</h1>
-            <p>Protección Inteligente</p>
-          </div>
-          <div id="auth-views" class="auth-views">
-            <div id="login-view" class="auth-view active"></div>
-            <div id="register-view" class="auth-view"></div>
-            <div id="forgot-view" class="auth-view"></div>
-            <div id="verify-view" class="auth-view"></div>
-          </div>
-        </div>
-      </div>
-    `,document.getElementById("login-view").innerHTML=iu,document.getElementById("register-view").innerHTML=su,document.getElementById("forgot-view").innerHTML=ru,document.getElementById("verify-view").innerHTML=ou,this.authController=new F_,setTimeout(()=>{this.setupAuthEvents()},100))}setupAuthEvents(){var e,t,i,s,r,o,a,c,l,u,d,h,f,g,v;(e=document.getElementById("switch-to-register"))==null||e.addEventListener("click",()=>this.authController.showView("register")),(t=document.getElementById("switch-to-login"))==null||t.addEventListener("click",()=>this.authController.showView("login")),(i=document.getElementById("forgot-password-btn"))==null||i.addEventListener("click",()=>this.authController.showView("forgot")),(s=document.getElementById("back-to-login"))==null||s.addEventListener("click",()=>this.authController.showView("login")),(r=document.getElementById("back-to-login-from-verify"))==null||r.addEventListener("click",()=>this.authController.showView("login")),(o=document.getElementById("toggle-login-password"))==null||o.addEventListener("click",()=>this.authController.togglePassword("login-password")),(a=document.getElementById("toggle-register-password"))==null||a.addEventListener("click",()=>this.authController.togglePassword("register-password")),(c=document.getElementById("login-form"))==null||c.addEventListener("submit",C=>this.authController.handleLogin(C)),(l=document.getElementById("register-form"))==null||l.addEventListener("submit",C=>this.authController.handleRegister(C)),(u=document.getElementById("forgot-form"))==null||u.addEventListener("submit",C=>this.authController.handleForgotPassword(C)),(d=document.getElementById("google-login-btn"))==null||d.addEventListener("click",()=>this.authController.handleGoogleLogin()),(h=document.getElementById("google-register-btn"))==null||h.addEventListener("click",()=>this.authController.handleGoogleLogin()),(f=document.getElementById("resend-verification-btn"))==null||f.addEventListener("click",()=>this.authController.handleResendVerification()),(g=document.getElementById("check-verification-btn"))==null||g.addEventListener("click",()=>this.authController.handleCheckVerification()),(v=document.getElementById("logout-from-verify"))==null||v.addEventListener("click",async()=>await Kn())}showVerification(e){var i,s;const t=document.getElementById("main-content");t.innerHTML=`
-      <div class="auth-container">
-        <div class="auth-background">
-          <div class="bg-circle bg-circle-1"></div>
-          <div class="bg-circle bg-circle-2"></div>
-          <div class="bg-circle bg-circle-3"></div>
-        </div>
-        <div class="auth-card fade-in">
-          <div class="verify-content">
-            <span class="material-symbols-outlined verify-icon">mark_email_unread</span>
-            <h2>Verifica tu correo</h2>
-            <p id="verify-message">Enlace enviado a <strong>${e.email}</strong></p>
-            <div class="verify-actions">
-              <button class="auth-button primary-button" id="check-verification-btn">
-                <span class="button-text">Ya verifiqué</span>
-              </button>
-              <button class="link-button" id="logout-from-verify">Cerrar sesión</button>
+        `,document.getElementById("login-view").innerHTML=iu,document.getElementById("register-view").innerHTML=su,document.getElementById("forgot-view").innerHTML=ru,document.getElementById("verify-view").innerHTML=ou,this.authController=new F_,setTimeout(()=>{this.setupAuthEvents()},100))}setupAuthEvents(){var e,t,i,s,r,o,a,c,l,u,d,h,f,g,v;(e=document.getElementById("switch-to-register"))==null||e.addEventListener("click",()=>this.authController.showView("register")),(t=document.getElementById("switch-to-login"))==null||t.addEventListener("click",()=>this.authController.showView("login")),(i=document.getElementById("forgot-password-btn"))==null||i.addEventListener("click",()=>this.authController.showView("forgot")),(s=document.getElementById("back-to-login"))==null||s.addEventListener("click",()=>this.authController.showView("login")),(r=document.getElementById("back-to-login-from-verify"))==null||r.addEventListener("click",()=>this.authController.showView("login")),(o=document.getElementById("toggle-login-password"))==null||o.addEventListener("click",()=>this.authController.togglePassword("login-password")),(a=document.getElementById("toggle-register-password"))==null||a.addEventListener("click",()=>this.authController.togglePassword("register-password")),(c=document.getElementById("login-form"))==null||c.addEventListener("submit",C=>this.authController.handleLogin(C)),(l=document.getElementById("register-form"))==null||l.addEventListener("submit",C=>this.authController.handleRegister(C)),(u=document.getElementById("forgot-form"))==null||u.addEventListener("submit",C=>this.authController.handleForgotPassword(C)),(d=document.getElementById("google-login-btn"))==null||d.addEventListener("click",()=>this.authController.handleGoogleLogin()),(h=document.getElementById("google-register-btn"))==null||h.addEventListener("click",()=>this.authController.handleGoogleLogin()),(f=document.getElementById("resend-verification-btn"))==null||f.addEventListener("click",()=>this.authController.handleResendVerification()),(g=document.getElementById("check-verification-btn"))==null||g.addEventListener("click",()=>this.authController.handleCheckVerification()),(v=document.getElementById("logout-from-verify"))==null||v.addEventListener("click",async()=>await Kn())}showVerification(e){var i,s;const t=document.getElementById("main-content");t.innerHTML=`
+            <div class="auth-container">
+                <div class="auth-background">
+                    <div class="bg-circle bg-circle-1"></div>
+                    <div class="bg-circle bg-circle-2"></div>
+                    <div class="bg-circle bg-circle-3"></div>
+                </div>
+                <div class="auth-card fade-in">
+                    <div class="verify-content">
+                        <span class="material-symbols-outlined verify-icon">mark_email_unread</span>
+                        <h2>Verifica tu correo</h2>
+                        <p id="verify-message">Enlace enviado a <strong>${e.email}</strong></p>
+                        <div class="verify-actions">
+                            <button class="auth-button primary-button" id="check-verification-btn">
+                                <span class="button-text">Ya verifiqué</span>
+                            </button>
+                            <button class="link-button" id="logout-from-verify">Cerrar sesión</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    `,(i=document.getElementById("check-verification-btn"))==null||i.addEventListener("click",async()=>{const{checkEmailVerification:r}=await fn(async()=>{const{checkEmailVerification:a}=await Promise.resolve().then(()=>Ho);return{checkEmailVerification:a}},void 0,import.meta.url);(await r()).verified&&window.location.reload()}),(s=document.getElementById("logout-from-verify"))==null||s.addEventListener("click",async()=>await Kn())}showOfflineDashboard(){const e=document.getElementById("splash-screen");e&&(e.style.opacity="0",e.style.transition="opacity 0.2s ease",setTimeout(()=>e.remove(),150));const t=document.getElementById("main-content");t.innerHTML=au;const i=JSON.parse(localStorage.getItem("user")||"{}"),s=JSON.parse(localStorage.getItem("sites_"+i.uid)||"[]"),r=document.getElementById("offline-sites-list");r&&(s.length>0?r.innerHTML=s.map(a=>`
-          <div class="site-card">
-            <div class="site-icon offline">
-              <span class="material-symbols-outlined">${a.icon||"devices"}</span>
-            </div>
-            <div class="site-info">
-              <h3>${a.name}</h3>
-              <p class="site-serial">${a.typeName||"Dispositivo"} • ${a.serial}</p>
-              <div class="site-status">
-                <span class="status-dot offline"></span>
-                <span class="status-text">Sin conexión</span>
-              </div>
-            </div>
-          </div>
-        `).join(""):r.innerHTML=`
-          <div class="empty-state">
-            <span class="material-symbols-outlined">cloud_off</span>
-            <h3>Sin sitios guardados</h3>
-            <p>Conéctate para cargar tus sitios</p>
-          </div>`);const o=document.querySelector(".add-site-container");o&&(o.style.display="none")}stopActiveView(){this.dashboardController&&this.dashboardController.stopAllListeners()}async openDeviceView(e,t){if(this.stopActiveView(),this.activeView="device",this.currentSerial=e,history.pushState({view:"device"},""),t===1||t==="1"){const{openDoorView:i}=await fn(async()=>{const{openDoorView:s}=await import("./doorViewController-DrCRrhS0.js");return{openDoorView:s}},__vite__mapDeps([0,1]),import.meta.url);i(this.currentUser,e,()=>{Rt(),history.replaceState({view:"dashboard"},""),this.activeView="dashboard",this.showDashboard(this.currentUser)})}else if(t===5||t==="5"){const{openAlarmDscView:i}=await fn(async()=>{const{openAlarmDscView:s}=await import("./alarmDscViewController-BGLbVajK.js");return{openAlarmDscView:s}},__vite__mapDeps([2,1]),import.meta.url);i(this.currentUser,e,()=>{Rt(),history.replaceState({view:"dashboard"},""),this.activeView="dashboard",this.showDashboard(this.currentUser)})}else alert(`Vista para tipo ${t} en desarrollo`)}handleVisibilityChange(){if(document.hidden)this.backgroundTimer||(this.backgroundTimer=setTimeout(async()=>{console.log("⏰ 10s en segundo plano, poniendo módulos en reposo");const e=this.currentUser||JSON.parse(localStorage.getItem("user")||"null");e&&e.uid&&await jo(e.uid),this.backgroundTimer=null},1e4));else if(this.backgroundTimer)clearTimeout(this.backgroundTimer),this.backgroundTimer=null,console.log("✅ Regresó antes de 10s, continuando normal");else{console.log("🔄 Regresó después de reposo, restaurando pings");const e=this.currentUser||JSON.parse(localStorage.getItem("user")||"null");e&&e.uid&&(this.activeView==="dashboard"?this.showDashboard(e):this.activeView==="device"&&this.currentSerial&&vr(this.currentSerial))}}handleAppClose(){const e=this.currentUser||JSON.parse(localStorage.getItem("user")||"null");e&&e.uid&&jo(e.uid)}}console.log("🟢 Iniciando ProtexHome...");const Xl=new by;document.querySelector("main")._app=Xl;window._app=Xl;export{q as a,se as b,Iy as c,Ty as d,Tl as e,Rt as f,fr as g,U_ as h,B_ as l,pl as o,vr as p,N as r,H_ as s,hr as u};
+        `,(i=document.getElementById("check-verification-btn"))==null||i.addEventListener("click",async()=>{const{checkEmailVerification:r}=await fn(async()=>{const{checkEmailVerification:a}=await Promise.resolve().then(()=>Ho);return{checkEmailVerification:a}},void 0,import.meta.url);(await r()).verified&&window.location.reload()}),(s=document.getElementById("logout-from-verify"))==null||s.addEventListener("click",async()=>await Kn())}showOfflineDashboard(){const e=document.getElementById("splash-screen");e&&(e.style.opacity="0",e.style.transition="opacity 0.2s ease",setTimeout(()=>e.remove(),150));const t=document.getElementById("main-content");t.innerHTML=au;const i=JSON.parse(localStorage.getItem("user")||"{}"),s=JSON.parse(localStorage.getItem("sites_"+i.uid)||"[]"),r=document.getElementById("offline-sites-list");r&&(s.length>0?r.innerHTML=s.map(a=>`
+                    <div class="site-card">
+                        <div class="site-icon offline">
+                            <span class="material-symbols-outlined">${a.icon||"devices"}</span>
+                        </div>
+                        <div class="site-info">
+                            <h3>${a.name}</h3>
+                            <p class="site-serial">${a.typeName||"Dispositivo"} • ${a.serial}</p>
+                            <div class="site-status">
+                                <span class="status-dot offline"></span>
+                                <span class="status-text">Sin conexión</span>
+                            </div>
+                        </div>
+                    </div>
+                `).join(""):r.innerHTML=`
+                    <div class="empty-state">
+                        <span class="material-symbols-outlined">cloud_off</span>
+                        <h3>Sin sitios guardados</h3>
+                        <p>Conéctate para cargar tus sitios</p>
+                    </div>`);const o=document.querySelector(".add-site-container");o&&(o.style.display="none")}stopActiveView(){this.dashboardController&&this.dashboardController.stopAllListeners()}async openDeviceView(e,t){if(this.stopActiveView(),this.activeView="device",this.currentSerial=e,history.pushState({view:"device"},""),t===1||t==="1"){const{openDoorView:i}=await fn(async()=>{const{openDoorView:s}=await import("./doorViewController-CGxel0xW.js");return{openDoorView:s}},__vite__mapDeps([0,1]),import.meta.url);i(this.currentUser,e,()=>{Rt(),history.replaceState({view:"dashboard"},""),this.activeView="dashboard",this.showDashboard(this.currentUser)})}else if(t===5||t==="5"){const{openAlarmDscView:i}=await fn(async()=>{const{openAlarmDscView:s}=await import("./alarmDscViewController-D1M4Y5VW.js");return{openAlarmDscView:s}},__vite__mapDeps([2,1]),import.meta.url);i(this.currentUser,e,()=>{Rt(),history.replaceState({view:"dashboard"},""),this.activeView="dashboard",this.showDashboard(this.currentUser)})}else alert(`Vista para tipo ${t} en desarrollo`)}handleVisibilityChange(){if(document.hidden)this.backgroundTimer||(this.backgroundTimer=setTimeout(async()=>{console.log("⏰ 10s en segundo plano, poniendo módulos en reposo");const e=this.currentUser||JSON.parse(localStorage.getItem("user")||"null");e&&e.uid&&await jo(e.uid),this.backgroundTimer=null},1e4));else if(this.backgroundTimer)clearTimeout(this.backgroundTimer),this.backgroundTimer=null,console.log("✅ Regresó antes de 10s, continuando normal");else{console.log("🔄 Regresó después de reposo, restaurando pings");const e=this.currentUser||JSON.parse(localStorage.getItem("user")||"null");e&&e.uid&&(this.activeView==="dashboard"?this.showDashboard(e):this.activeView==="device"&&this.currentSerial&&vr(this.currentSerial))}}handleAppClose(){const e=this.currentUser||JSON.parse(localStorage.getItem("user")||"null");e&&e.uid&&jo(e.uid)}}console.log("🟢 Iniciando ProtexHome...");const Xl=new by;document.querySelector("main")._app=Xl;window._app=Xl;export{q as a,se as b,Iy as c,Ty as d,Tl as e,Rt as f,fr as g,U_ as h,B_ as l,pl as o,vr as p,N as r,H_ as s,hr as u};

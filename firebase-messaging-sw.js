@@ -14,11 +14,8 @@ firebase.initializeApp({
 
 const messaging = firebase.messaging();
 
-// ============================================================
-// FUNCIÓN DE FORMATEO (idéntica a la de notifications.js)
-// ============================================================
 function formatEventMessage(payload) {
-    const { A: partition, D: zoneOrUser, E: eventType, F: date, N: name, S: serial } = payload;
+    const { A: partition, D: zoneOrUser, E: eventType, N: name, S: serial } = payload;
     const zonaNum = String(zoneOrUser || 0).padStart(2, '0');
     const nombre = name || 'Usuario';
     const serialDisplay = serial || '';
@@ -108,15 +105,9 @@ function formatEventMessage(payload) {
     return { title, body, icon, color };
 }
 
-// ============================================================
-// MANEJAR NOTIFICACIONES EN SEGUNDO PLANO
-// ============================================================
 messaging.onBackgroundMessage((payload) => {
     console.log('📩 Notificación en segundo plano (SW):', payload);
-
     const eventData = payload.data || {};
-
-    // Si no hay datos estructurados, mostrar mensaje genérico
     if (eventData.E === undefined) {
         const notificationTitle = payload.notification?.title || 'ProtexHome';
         const notificationBody = payload.notification?.body || 'Nuevo evento';
@@ -128,9 +119,7 @@ messaging.onBackgroundMessage((payload) => {
         };
         return self.registration.showNotification(notificationTitle, options);
     }
-
     const { title, body, icon, color } = formatEventMessage(eventData);
-
     const options = {
         body: body,
         icon: './assets/icon-512.png',
@@ -139,26 +128,18 @@ messaging.onBackgroundMessage((payload) => {
         requireInteraction: true,
         data: { payload: eventData }
     };
-
     if (Notification.prototype.hasOwnProperty('color')) {
         options.color = color;
     }
-
     self.registration.showNotification(title, options);
 });
 
-// ============================================================
-// MANEJAR CLIC EN NOTIFICACIÓN (cuando la app está cerrada)
-// ============================================================
 self.addEventListener('notificationclick', (event) => {
     event.notification.close();
     const payload = event.notification.data?.payload;
     if (payload) {
         console.log('🔔 Usuario hizo clic en la notificación (SW):', payload);
-        // Abrir la aplicación (puedes pasar el serial como parámetro)
         const urlToOpen = new URL('/', self.location.origin).href;
-        // Opcional: redirigir a la vista DSC del serial
-        // if (payload.S) { urlToOpen = new URL(`/?serial=${payload.S}`, self.location.origin).href; }
         event.waitUntil(
             clients.openWindow(urlToOpen)
         );
