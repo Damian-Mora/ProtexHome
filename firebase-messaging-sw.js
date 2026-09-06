@@ -14,6 +14,9 @@ firebase.initializeApp({
 
 const messaging = firebase.messaging();
 
+// ============================================================
+// FUNCIÓN DE FORMATEO (idéntica a la de notifications.js)
+// ============================================================
 function formatEventMessage(payload) {
     const { A: partition, D: zoneOrUser, E: eventType, N: name, S: serial } = payload;
     const zonaNum = String(zoneOrUser || 0).padStart(2, '0');
@@ -105,43 +108,89 @@ function formatEventMessage(payload) {
     return { title, body, icon, color };
 }
 
+// ============================================================
+// MANEJAR NOTIFICACIONES EN SEGUNDO PLANO
+// ============================================================
 messaging.onBackgroundMessage((payload) => {
-    console.log('📩 Notificación en segundo plano (SW):', payload);
+    console.log('📩 SW: Notificación en segundo plano:', payload);
+
     const eventData = payload.data || {};
+
+    // Si no hay datos estructurados, mostrar mensaje genérico
     if (eventData.E === undefined) {
         const notificationTitle = payload.notification?.title || 'ProtexHome';
         const notificationBody = payload.notification?.body || 'Nuevo evento';
         const options = {
             body: notificationBody,
-            icon: './assets/icon-512.png',
-            badge: './assets/icon-512.png',
+            icon: '/assets/icon-512.png',
+            badge: '/assets/icon-512.png',
             requireInteraction: true,
+            sound: '/assets/alarm.mp3' // Intentar sonido
         };
         return self.registration.showNotification(notificationTitle, options);
     }
+
+    // Formatear el evento
     const { title, body, icon, color } = formatEventMessage(eventData);
+
     const options = {
         body: body,
-        icon: './assets/icon-512.png',
-        badge: './assets/icon-512.png',
+        icon: '/assets/icon-512.png',
+        badge: '/assets/icon-512.png',
         tag: `event-${eventData.S || 'unknown'}-${eventData.D}-${Date.now()}`,
         requireInteraction: true,
-        data: { payload: eventData }
+        data: { payload: eventData },
+        sound: '/assets/alarm.mp3' // Intentar sonido
     };
+
+    // Algunos navegadores soportan color
     if (Notification.prototype.hasOwnProperty('color')) {
         options.color = color;
     }
+
     self.registration.showNotification(title, options);
 });
 
+// ============================================================
+// MANEJAR CLIC EN NOTIFICACIÓN
+// ============================================================
 self.addEventListener('notificationclick', (event) => {
     event.notification.close();
     const payload = event.notification.data?.payload;
     if (payload) {
-        console.log('🔔 Usuario hizo clic en la notificación (SW):', payload);
+        console.log('🔔 SW: Usuario hizo clic en la notificación:', payload);
         const urlToOpen = new URL('/', self.location.origin).href;
+        // Redirigir a la vista del serial
+        if (payload.S) {
+            const url = new URL(`/?serial=${payload.S}`, self.location.origin);
+            urlToOpen = url.href;
+        }
         event.waitUntil(
             clients.openWindow(urlToOpen)
         );
+    }
+});
+
+// ============================================================
+// ESCUCHAR MENSAJES DE LA PÁGINA (para mostrar notificaciones forzadas)
+// ============================================================
+self.addEventListener('message', (event) => {
+    if (event.data && event.data.type === 'SHOW_NOTIFICATION') {
+        console.log('📩 SW: Recibido mensaje para mostrar notificación:', event.data.payload);
+        const payload = event.data.payload;
+        const { title, body, icon, color } = formatEventMessage(payload);
+        const options = {
+            body: body,
+            icon: '/assets/icon-512.png',
+            badge: '/assets/icon-512.png',
+            tag: `event-${payload.S || 'unknown'}-${payload.D}-${Date.now()}`,
+            requireInteraction: true,
+            data: { payload },
+            sound: '/assets/alarm.mp3'
+        };
+        if (Notification.prototype.hasOwnProperty('color')) {
+            options.color = color;
+        }
+        self.registration.showNotification(title, options);
     }
 });
