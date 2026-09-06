@@ -114,10 +114,9 @@ function formatEventMessage(payload) {
 messaging.onBackgroundMessage((payload) => {
     console.log('📩 Notificación en segundo plano (SW):', payload);
 
-    // Extraer datos del payload
     const eventData = payload.data || {};
 
-    // Si no hay datos estructurados, mostrar el mensaje tal cual
+    // Si no hay datos estructurados, mostrar mensaje genérico
     if (eventData.E === undefined) {
         const notificationTitle = payload.notification?.title || 'ProtexHome';
         const notificationBody = payload.notification?.body || 'Nuevo evento';
@@ -130,7 +129,6 @@ messaging.onBackgroundMessage((payload) => {
         return self.registration.showNotification(notificationTitle, options);
     }
 
-    // Formatear el evento con la misma función
     const { title, body, icon, color } = formatEventMessage(eventData);
 
     const options = {
@@ -142,7 +140,6 @@ messaging.onBackgroundMessage((payload) => {
         data: { payload: eventData }
     };
 
-    // Algunos navegadores soportan color en la notificación
     if (Notification.prototype.hasOwnProperty('color')) {
         options.color = color;
     }
