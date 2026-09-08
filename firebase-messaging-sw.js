@@ -1,11 +1,11 @@
 // public/firebase-messaging-sw.js
 
 importScripts(
-    'https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js'
+    'https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js'
 );
 
 importScripts(
-    'https://www.gstatic.com/firebasejs/10.13.2/firebase-messaging-compat.js'
+    'https://www.gstatic.com/firebasejs/10.14.1/firebase-messaging-compat.js'
 );
 
 
