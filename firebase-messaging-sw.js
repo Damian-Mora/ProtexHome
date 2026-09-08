@@ -61,6 +61,18 @@ self.addEventListener(
 // ACTIVACIÓN
 // ============================================================
 
+self.addEventListener('activate', (event) => {
+    console.log('✅ FCM SW activado');
+    event.waitUntil(self.clients.claim());
+    // Notificación de prueba a los 5 segundos
+    setTimeout(() => {
+        self.registration.showNotification('🧪 Prueba SW', {
+            body: 'Si ves esto, el SW funciona',
+            icon: '/ProtexHome/assets/icon-512.png',
+        });
+    }, 5000);
+});
+/*
 self.addEventListener(
     'activate',
     (event) => {
@@ -74,7 +86,7 @@ self.addEventListener(
         );
     }
 );
-
+*/
 
 // ============================================================
 // FORMATEO
