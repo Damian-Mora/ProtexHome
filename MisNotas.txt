@@ -1,0 +1,299 @@
+npm run dev  inicia vite
+
+https://app.netlify.com/drop
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDFMhDmYMnrO5hp7vRyfM0YehoSGecgfEs",
+  authDomain: "iotalarma.firebaseapp.com",
+  databaseURL: "https://iotalarma-default-rtdb.firebaseio.com",
+  projectId: "iotalarma",
+  storageBucket: "iotalarma.appspot.com",
+  messagingSenderId: "747127575803",
+  appId: "1:747127575803:web:24ba7e8dd5e9cc67eb4c5e",
+  measurementId: "G-L0SVPJEY1B"
+};
+*/
+
+/*
+esto si funciona se copia todo de una vez 
+npm run build
+cd dist
+git add .
+git commit -m "Nuevo dashboard: Mis sitios"
+git push origin gh-pages
+cd ..
+
+*/
+
+///
+npm run build
+
+cd dist
+git init
+git checkout -b gh-pages
+git remote add origin https://github.com/Damian-Mora/SecureHome.git
+git add .
+git commit -m "Fix: eliminar HTML bruto - estilos 100% inline"
+git push -f origin gh-pages
+cd ..
+//
+
+
+# 1. Construir el proyecto
+npm run build
+
+# 2. Crear carpeta temporal y copiar dist
+mkdir temp-deploy
+cp -r dist/* temp-deploy/
+
+# 3. Cambiar a la rama gh-pages
+git checkout -b gh-pages
+
+# 4. Eliminar todo menos la carpeta temp-deploy
+rm -rf *
+cp -r temp-deploy/* .
+rm -rf temp-deploy
+
+# 5. Agregar y commit
+git add .
+git commit -m "Deploy: Actualización de la PWA"
+
+# 6. Subir a GitHub
+git push origin gh-pages
+
+# 7. Volver a la rama main
+git checkout main
+
+
+
+src/
+├── main.js                       ← Inicia la app
+├── firebase.js                   ← Config Firebase
+├── pwa.js                        ← Gestor PWA
+│
+├── pages/                        ← Solo HTML
+│   ├── login.html
+│   ├── register.html
+│   ├── forgot.html
+│   ├── verify.html
+│   ├── dashboard.html
+│   └── offline.html
+│
+├── controllers/                  ← Solo JS (lógica de cada página)
+│   ├── authController.js        ← Lógica de login + registro
+│   ├── dashboardController.js   ← Lógica del dashboard
+│   └── deviceController.js      ← Control de ESP32
+│
+└── styles/                       ← Solo CSS
+    ├── base.css
+    ├── auth.css
+    ├── dashboard.css
+    └── components.css
+
+
+
+
+ C= CLAVE
+ N = NOMBRE DEL sitios
+ U = TIPO DE USUARIO ADMIN, INV= INVITADO; 
+ T = TIPO DE ALARMA 1 = PUERTAS CORREDIZAS, 2 CONTROL DE ACCESO, 3 ALARMA COMUNITARIA; 4 ALARMA IOT, 5 ALARMA DSC
+
+{
+  "UJ3IrsJ36CeAOQ2vOQzsY1yarRQ2": {
+    "E": "damiancho.85@gmail.com",
+    "M": {
+      "AA0001": {
+        "C": 1570,
+        "N": "PARQUE",
+        "U": "ADM",
+        "T": 1
+      },
+      "AA0002": {
+        "C": 1570,
+        "N": "CASA",
+        "U": "ADM",
+        "T": 1
+      },
+      "AA0003": {
+        "C": 1570,
+        "N": "CASA",
+        "U": "ADM",
+        "T": 2
+      }
+    },
+    "AA0004": {
+      "C": 1570,
+      "N": "CASA",
+      "U": "ADM",
+      "T": 3
+    },
+    "AA0005": {
+      "C": 1570,
+      "N": "CASA",
+      "U": "ADM",
+      "T": 1
+    },
+    "AA0006": {
+      "C": 1570,
+      "N": "CASA",
+      "U": "ADM",
+      "T": 4
+    },
+    "AA0007": {
+      "C": 1570,
+      "N": "CASA",
+      "U": "ADM",
+      "T": 1
+    },
+    "Ac0003": {
+      "C": "1570",
+      "N": "Comunidad ",
+      "U": "ADM",
+      "T": 1
+    },
+    "PT0006": {
+      "C": 1570,
+      "N": "PORTON",
+      "U": "ADM",
+      "T": 1
+    }
+  },
+  "N": "Damian Mora",
+  "emailVerified": true,
+  "lastLogin": "2026-08-05T23:41:47.833Z",
+  "photoURL": "https://lh3.googleusercontent.com/a/ACg8ocImNWKNY4XThKKMsjQii86qdpP9S0xbVi4tLQS0SvEAP0kw-hgL=s96-c",
+  "updatedAt": "2026-07-28T16:36:33.871Z"
+}
+
+"M":{
+  "AA0001":{
+    "X":{
+      "S1":{
+        "E":2,
+        "R":2;
+      }
+    }
+  }
+}
+
+"M":{
+  "AA0001":{
+    "W":{
+      "NPG":{
+        "1":{
+          "N":"PUERTA PRINCIPAL"
+        },
+        "2":{
+          "N":"PUERTA AUXILIAR"
+        },
+      }
+      "Z":{
+      "1":{
+        "E":1
+      },
+      "2":{
+        "E":2
+      }
+      }
+    }
+  }
+}
+
+
+
+{
+  "rules": {
+    "US": {
+      "$uid": {
+        ".read": "$uid === auth.uid",
+        ".write": "$uid === auth.uid",
+        "M": {
+          "$serial": {
+            ".read": "$uid === auth.uid",
+            ".write": "$uid === auth.uid"
+          }
+        }
+      }
+    },
+    "P": {
+      "$serial": {
+        ".read": "auth != null",
+        ".write": "auth != null",
+        "L": {
+          ".write": "auth != null"
+        }
+      }
+    },
+    "M": {
+      "$serial": {
+        ".read": "auth != null",
+        ".write": "auth != null",
+        "X": {
+          "D": {
+            "L": {
+              ".write": "auth != null"
+            }
+          }
+        },
+        "W": {
+          ".read": "auth != null",
+          ".write": "auth != null"
+        },
+        "H": {
+          ".read": "auth != null",
+          ".write": "auth != null"
+        }
+      }
+    }
+  }
+}
+
+M/
+  AA0001 /
+        └── US/
+            [uid_]
+                    ├── E: "invitado@gmail.com"
+                    ├── U: "INV"  (INV=Invitado, ADM=Admin)
+                    └── N: "Juan"
+             [uid_]
+                    ├── E: "invitado2@gmail.com"
+                    ├── U: "INV"  (INV=Invitado, ADM=Admin)
+                    └── N: "PEPE"
+
+
+
+US/
+└── [uid_dueño]/
+    └── M/
+        └── AA0001/
+            └── 
+                    ├── E: "invitado@gmail.com"
+                    ├── U: "INV"  (INV=Invitado, ADM=Admin)
+                    └── N: "Juan"
+            AA0002/
+            └── 
+                    ├── E: "invitado@gmail.com"
+                    ├── U: "INV"  (INV=Invitado, ADM=Admin)
+                    └── N: "Juan"
+
+
+M/
+ SERIAL/
+       [nuemro O CLAVE Q LA DA EL ESP32 aleatorio]/
+              A: 1
+              D: 2
+              E:6
+              F: "2026/05/23 15:47"
+              N: " DAMIAN MORA"
+              S: "AA0001" 
+       [nuemro O CLAVE Q LA DA EL ESP32 aleatorio]/
+              A: 1
+              D: 2
+              E:7
+              F: "2026/05/23 15:49"
+              N: " DAMIAN MORA"
+              S: "AA0001"                 
+                    
+
+                    

@@ -1,0 +1,30 @@
+<!-- Recuperar Contraseña -->
+<div class="auth-sub-header">
+    <button type="button" class="back-button" id="back-to-login">
+        <span class="material-symbols-outlined">arrow_back</span>
+    </button>
+    <h2>Recuperar Contraseña</h2>
+    <p>Ingresa tu correo y te enviaremos un enlace</p>
+</div>
+
+<form id="forgot-form" class="auth-form" novalidate>
+    <div class="input-group">
+        <label for="forgot-email">Correo electrónico</label>
+        <div class="input-wrapper">
+            <span class="material-symbols-outlined input-icon">mail</span>
+            <input type="email" id="forgot-email" class="auth-input" placeholder="correo@ejemplo.com" required>
+            <span class="input-focus-border"></span>
+        </div>
+        <span class="input-error" id="forgot-email-error"></span>
+    </div>
+
+    <div class="auth-error" id="forgot-error"></div>
+    <div class="auth-success" id="forgot-success"></div>
+
+    <button type="submit" class="auth-button primary-button" id="forgot-submit">
+        <span class="button-text">Enviar Enlace</span>
+        <span class="button-loader" style="display: none;">
+            <span class="loader"></span>
+        </span>
+    </button>
+</form>
