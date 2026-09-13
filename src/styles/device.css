@@ -590,3 +590,33 @@
     padding-bottom: 40px;
   }
 }
+
+/* ---------- Controles de acceso y alarma ---------- */
+.device-container { background: linear-gradient(180deg, #eff6f7, #f8fafb); }
+.device-header { padding: 15px 16px; background: #fff; border-bottom: 1px solid var(--border-color); box-shadow: 0 2px 10px rgba(6,44,60,.04); }
+.device-header h2 { letter-spacing: -.025em; }
+.device-status-badge { padding: 6px 9px; border-radius: 999px; background: var(--success-bg); color: var(--success); font-weight: 700; }
+.device-body { padding: 16px; }
+.door-card, .dsc-partition-card, .history-item, .zone-item { border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); }
+.door-card { padding: 17px; border-radius: 18px; }
+.door-card-icon { width: 40px; height: 40px; display: grid; place-items: center; font-size: 20px; border-radius: 13px; background: var(--primary-soft); }
+.door-card-status { background: var(--success-bg); color: var(--success); border: 1px solid rgba(22,131,90,.15); }
+.btn-edit-name { color: var(--primary); opacity: .8; }
+.btn-door-action { min-height: 54px; border-radius: 13px; background: linear-gradient(135deg, var(--primary), #056875); color: #fff; border: 0; box-shadow: 0 8px 16px rgba(8,126,139,.18); }
+.btn-door-action:active { background: var(--primary-dark); border: 0; }
+.btn-door-action.waiting { background: var(--warning-bg); border: 1px solid #edc46a; color: #895804; box-shadow: none; }
+.history-title { margin: 20px 2px 10px; font-size: .86rem; letter-spacing: .06em; text-transform: uppercase; color: var(--text-secondary); }
+.history-item { border-radius: 13px; }
+.dsc-partition-selector { padding: 12px 14px; margin: 0 0 12px; background: #fff; border: 1px solid var(--border-color); border-radius: 14px; }
+.dsc-select { border: 0; background: var(--surface-muted); border-radius: 10px; font-weight: 700; color: var(--primary-dark); }
+.dsc-partition-card { border-radius: 18px; padding: 15px; }
+.dsc-partition-header .material-symbols-outlined { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 13px; background: var(--primary-soft); color: var(--primary); }
+.dsc-controls-row { gap: 10px; margin: 14px 0; }
+.dsc-action-btn { min-height: 82px; border-radius: 16px; box-shadow: 0 7px 14px rgba(6,44,60,.12); }
+.dsc-away { background: linear-gradient(145deg, #d84c57, #b52e3d); }
+.dsc-home { background: linear-gradient(145deg, #e6a42c, #bd7808); }
+.dsc-disarm { background: linear-gradient(145deg, #19976a, #116e4e); }
+.dsc-tab { border: 1px solid var(--border-color); background: #fff; color: var(--text-secondary); }
+.dsc-tab.active { border-color: var(--primary); background: var(--primary); box-shadow: 0 5px 12px rgba(8,126,139,.2); }
+.zone-item { border-radius: 13px; margin-bottom: 8px; }
+.btn-bypass { background: var(--warning-bg); color: #875704; font-weight: 700; }

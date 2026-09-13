@@ -312,3 +312,42 @@
     border-right: 1px solid var(--border-color);
   }
 }
+
+/* ---------- Centro de control ---------- */
+.dash-container { background: linear-gradient(180deg, #eef5f6 0%, #f7fafb 45%, #eff5f6 100%); }
+.dash-header {
+  min-height: 82px;
+  padding: 18px 18px 16px;
+  background: linear-gradient(135deg, #063142, #087e8b);
+  border: 0;
+  box-shadow: 0 6px 18px rgba(6,44,60,.16);
+}
+.dash-header h2 { color: #fff; letter-spacing: -.03em; font-size: 1.35rem; }
+.dash-header h2::after { content: 'Panel de seguridad'; display: block; margin-top: 3px; font-size: .69rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; color: rgba(255,255,255,.68); }
+.dash-icon-btn { color: var(--text-secondary); transition: background .18s, transform .18s; }
+.dash-header .dash-icon-btn { color: #fff; background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.18); }
+.dash-icon-btn:active { transform: scale(.93); }
+.search-bar { margin: 16px 16px 12px; padding: 12px 14px; border: 1px solid var(--border-color); background: #fff; box-shadow: var(--shadow-sm); }
+.search-icon { color: var(--primary); }
+.search-input { font-size: .9rem; }
+.sites-list { padding: 0 16px 16px; }
+.site-card {
+  padding: 15px;
+  margin-bottom: 10px;
+  border: 1px solid rgba(220,231,234,.9);
+  box-shadow: var(--shadow-sm);
+  transition: transform .18s, box-shadow .18s, border-color .18s;
+}
+.site-card:hover { border-color: rgba(8,126,139,.35); box-shadow: var(--shadow-md); transform: translateY(-1px); }
+.site-card:active { background: #fff; transform: scale(.985); }
+.site-icon { width: 48px; height: 48px; border-radius: 15px; }
+.site-icon.online { background: linear-gradient(145deg, #dff6f1, #f0fbfa); color: var(--primary); }
+.site-icon.offline { background: var(--error-bg); color: var(--error); }
+.site-info h3 { font-size: .98rem; }
+.site-serial { margin-top: 3px; color: var(--text-secondary); }
+.status-dot.online { background: var(--primary-light); box-shadow: 0 0 0 3px rgba(53,199,194,.16); }
+.status-dot.offline { background: var(--error); box-shadow: 0 0 0 3px rgba(195,58,69,.12); }
+.status-text { font-weight: 600; color: var(--text-secondary); }
+.arrow-icon { color: var(--primary); }
+.add-site-container { padding: 12px 16px calc(16px + var(--safe-bottom)); background: rgba(247,250,251,.88); backdrop-filter: blur(10px); }
+.btn-add-site { border-radius: 15px; padding: 15px; background: linear-gradient(135deg, var(--primary), #056875); box-shadow: 0 12px 24px rgba(8,126,139,.20); }
