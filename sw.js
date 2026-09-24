@@ -4242,7 +4242,7 @@ function ra(t, e) {
 Zs();
 self.skipWaiting();
 nn();
-tn([{"revision":"6187ccd54a14347886b899f5c2575433","url":"registerSW.js"},{"revision":"56240da7ce639898a4e623f899f63e63","url":"index.html"},{"revision":"98d953f5a47e1266a464099d2fb00491","url":"firebase-messaging-sw.js"},{"revision":null,"url":"assets/index-CcoOFeEA.css"},{"revision":null,"url":"assets/index-BK4cC_Ur.js"},{"revision":null,"url":"assets/doorViewController-CU-_tMM3.js"},{"revision":null,"url":"assets/deviceController-CY3ubQm-.js"},{"revision":null,"url":"assets/alarmDscViewController-B8MKFlI4.js"},{"revision":null,"url":"assets/alarm.mp3"},{"revision":"ba747b08ba4f8e5ca6136c0e03d77650","url":"assets/icon-512.png"},{"revision":"c00669d2771511805a4000954e55cb5a","url":"manifest.json"}] || []);
+tn([{"revision":"6187ccd54a14347886b899f5c2575433","url":"registerSW.js"},{"revision":"56240da7ce639898a4e623f899f63e63","url":"index.html"},{"revision":null,"url":"assets/index-CcoOFeEA.css"},{"revision":null,"url":"assets/index-BK4cC_Ur.js"},{"revision":null,"url":"assets/doorViewController-CU-_tMM3.js"},{"revision":null,"url":"assets/deviceController-CY3ubQm-.js"},{"revision":null,"url":"assets/alarmDscViewController-B8MKFlI4.js"},{"revision":null,"url":"assets/alarm.mp3"},{"revision":"ba747b08ba4f8e5ca6136c0e03d77650","url":"assets/icon-512.png"},{"revision":"c00669d2771511805a4000954e55cb5a","url":"manifest.json"}] || []);
 Zt();
 console.log("✅ SW: Workbox inicializado");
 const sa = {
