@@ -4251,7 +4251,7 @@ const aa = {
 }, K = "/ProtexHome/";
 self.skipWaiting();
 rn();
-nn([{"revision":"6187ccd54a14347886b899f5c2575433","url":"registerSW.js"},{"revision":"ec4adbc891cfbd7f7aba5cd4f6cc11d8","url":"index.html"},{"revision":null,"url":"assets/index-Di4jevkp.js"},{"revision":null,"url":"assets/index-C7x-J8lV.css"},{"revision":null,"url":"assets/doorViewController-DDzqbvzf.js"},{"revision":null,"url":"assets/deviceController-DiJeSy8M.js"},{"revision":null,"url":"assets/alarmDscViewController-B0-VEvvv.js"},{"revision":null,"url":"assets/alarm.mp3"},{"revision":"ba747b08ba4f8e5ca6136c0e03d77650","url":"assets/icon-512.png"},{"revision":"5a69e91af3b84a68ca86c8f296c7f168","url":"manifest.json"}] || []);
+nn([{"revision":"6187ccd54a14347886b899f5c2575433","url":"registerSW.js"},{"revision":"3816d44eb6642ba7ba3275f9fbb2b986","url":"index.html"},{"revision":null,"url":"assets/index-KHLNJ-fO.js"},{"revision":null,"url":"assets/index-C7x-J8lV.css"},{"revision":null,"url":"assets/doorViewController-CLsB6hM9.js"},{"revision":null,"url":"assets/deviceController-fNIzNvlN.js"},{"revision":null,"url":"assets/alarmDscViewController-D3SoexSz.js"},{"revision":null,"url":"assets/alarm.mp3"},{"revision":"6304384f6c4aef204a00482c37505a73","url":"assets/protexhome-icon-192.png"},{"revision":"76491c4ac3bc8429d729774c040c31dc","url":"assets/protexhome-icon-512.png"},{"revision":"d7a7b60448d2ccd317f22c2933b9e9c1","url":"manifest.json"}] || []);
 en();
 console.log("✅ SW: Workbox inicializado");
 const ia = Ze(aa), oa = ra(ia);
@@ -4318,8 +4318,8 @@ sa(oa, (t) => {
     color: "#6b7280"
   }, r = e.S || "unknown", s = {
     body: n.body,
-    icon: `${K}assets/icon-512.png`,
-    badge: `${K}assets/icon-512.png`,
+    icon: `${K}assets/protexhome-icon-512.png`,
+    badge: `${K}assets/protexhome-icon-192.png`,
     tag: `event-${r}-${Date.now()}`,
     requireInteraction: !0,
     vibrate: [200, 100, 200],
