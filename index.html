@@ -11,7 +11,7 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#087e8b">   <!-- ✅ Igual al manifest -->
+  <meta name="theme-color" content="#087e8b">
   <meta name="apple-mobile-web-app-title" content="ProtexHome">
 
   <!-- Manifest PWA -->
@@ -33,43 +33,14 @@
 
   <title>ProtexHome - Protección Inteligente</title>
 
-  <!-- ========== VARIABLES Y ESTILOS CRÍTICOS ========== -->
+  <!-- Estilos mínimos para evitar un destello antes de cargar la app. -->
   <style>
-    /* Variables CSS */
     :root {
-      --primary: #1a73e8;
-      --primary-dark: #1557b0;
+      --primary: #087e8b;
       --bg-white: #ffffff;
-      --bg-light: #f5f5f7;
-      --text-primary: #1a1a1a;
-      --text-light: #888888;
+      --bg-light: #f3f7f8;
       --text-white: #ffffff;
-      --success: #16a34a;
-      --error: #dc2626;
-      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
-      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
-      --radius-md: 12px;
-      --radius-lg: 16px;
       --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      --safe-top: env(safe-area-inset-top, 0px);
-      --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
-
-    /* Modo oscuro */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg-white: #1e1e1e;
-        --bg-light: #2d2d2d;
-        --text-primary: #e0e0e0;
-        --text-light: #999999;
-      }
-    }
-
-    /* Reset */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
     }
 
     html,
@@ -79,33 +50,18 @@
       font-family: var(--font-family);
       background: var(--bg-white);
       -webkit-font-smoothing: antialiased;
-      user-select: none;
-      -webkit-user-select: none;
-      -webkit-tap-highlight-color: transparent;
     }
 
-    /* 🔥 Barra de estado en modo PWA: color de fondo del tema y padding seguro */
     html {
       background-color: #087e8b;
-    }
-
-    body {
-      background: var(--bg-white);
-    }
-
-    /* Padding para evitar que el contenido quede bajo la barra de estado (notch y status bar) */
-    @media (display-mode: standalone) {
-      body {
-        padding-top: env(safe-area-inset-top);
-      }
     }
 
     #offline-banner {
       display: none !important;
     }
   </style>
-  <script type="module" crossorigin src="/ProtexHome/assets/index-TLfJRUpY.js"></script>
-  <link rel="stylesheet" crossorigin href="/ProtexHome/assets/index-CT3kyUO6.css">
+  <script type="module" crossorigin src="/ProtexHome/assets/index-56IEqwJl.js"></script>
+  <link rel="stylesheet" crossorigin href="/ProtexHome/assets/index-D7Ss1qzD.css">
 <link rel="manifest" href="/ProtexHome/manifest.json"><script id="vite-plugin-pwa:register-sw" src="/ProtexHome/registerSW.js"></script></head>
 
 <body>
