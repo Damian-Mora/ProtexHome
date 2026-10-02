@@ -4347,7 +4347,7 @@ async function hi(t) {
 const W = "/ProtexHome/";
 self.skipWaiting();
 sn();
-rn([{"revision":"d7a7b60448d2ccd317f22c2933b9e9c1","url":"manifest.json"},{"revision":"244841a613dbca262e9326efc4da5471","url":"index.html"},{"revision":null,"url":"assets/workbox-window.prod.es5-BqEJf4Xk.js"},{"revision":null,"url":"assets/protexhome-apple-touch-icon.png"},{"revision":null,"url":"assets/index-GytprA_N.js"},{"revision":null,"url":"assets/index-FEi-vLt_.css"},{"revision":null,"url":"assets/favicon.svg"},{"revision":null,"url":"assets/doorViewController-DvKhymnY.js"},{"revision":null,"url":"assets/deviceController-BJm_P6fl.js"},{"revision":null,"url":"assets/alarmDscViewController-DlcXt5Gu.js"},{"revision":null,"url":"assets/alarm.mp3"},{"revision":"6304384f6c4aef204a00482c37505a73","url":"assets/protexhome-icon-192.png"},{"revision":"76491c4ac3bc8429d729774c040c31dc","url":"assets/protexhome-icon-512.png"},{"revision":"d7a7b60448d2ccd317f22c2933b9e9c1","url":"manifest.json"}] || []);
+rn([{"revision":"d7a7b60448d2ccd317f22c2933b9e9c1","url":"manifest.json"},{"revision":"5341457598315992c8849e444d544c65","url":"index.html"},{"revision":null,"url":"assets/workbox-window.prod.es5-BqEJf4Xk.js"},{"revision":null,"url":"assets/protexhome-apple-touch-icon.png"},{"revision":null,"url":"assets/index-FEi-vLt_.css"},{"revision":null,"url":"assets/index-B8sGHUE7.js"},{"revision":null,"url":"assets/favicon.svg"},{"revision":null,"url":"assets/doorViewController-DNP9LySR.js"},{"revision":null,"url":"assets/deviceController-B_dUZCf2.js"},{"revision":null,"url":"assets/alarmDscViewController-D69QRD3y.js"},{"revision":null,"url":"assets/alarm.mp3"},{"revision":"6304384f6c4aef204a00482c37505a73","url":"assets/protexhome-icon-192.png"},{"revision":"76491c4ac3bc8429d729774c040c31dc","url":"assets/protexhome-icon-512.png"},{"revision":"d7a7b60448d2ccd317f22c2933b9e9c1","url":"manifest.json"}] || []);
 tn();
 console.log("✅ SW: Workbox inicializado");
 const di = et(ai), fi = si(di);
@@ -4363,9 +4363,9 @@ ii(fi, async (t) => {
     console.error("❌ SW: no se pudo recuperar el nombre del sitio:", c);
   }
   const r = e.E !== void 0 ? oi(e, n || e.siteName, t.sentTime) : {
-    title: ((a = t.notification) == null ? void 0 : a.title) || "ProtexHome",
-    body: ((o = t.notification) == null ? void 0 : o.body) || "Nuevo evento",
-    color: "#6b7280"
+    title: e.title || ((a = t.notification) == null ? void 0 : a.title) || "ProtexHome",
+    body: e.body || ((o = t.notification) == null ? void 0 : o.body) || "Nuevo evento",
+    color: "#087e8b"
   }, s = e.S || "unknown", i = {
     body: r.body,
     icon: `${W}assets/protexhome-icon-512.png`,
@@ -4383,7 +4383,7 @@ self.addEventListener("notificationclick", (t) => {
   console.log("🔔 SW: click en notificación"), t.notification.close();
   const e = (r = t.notification.data) == null ? void 0 : r.payload;
   let n = W;
-  e != null && e.S && (n = `${W}?serial=${encodeURIComponent(e.S)}`), t.waitUntil(clients.openWindow(n));
+  (e == null ? void 0 : e.type) !== "site_access_removed" && (e != null && e.S) && (n = `${W}?serial=${encodeURIComponent(e.S)}`), t.waitUntil(clients.openWindow(n));
 });
 self.addEventListener("activate", (t) => {
   console.log("✅ SW: activado"), t.waitUntil(self.clients.claim());
