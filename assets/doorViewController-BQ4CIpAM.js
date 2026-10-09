@@ -1,4 +1,4 @@
-import{D as Q}from"./deviceController-BNaxoJRh.js";import{g as S,r as b,a as I,o as Z,e as v,s as w,b as u,c as j,d as Y,f as J,h as V,u as K,i as z,j as X}from"./index-CMfhgJt_.js";const ee=`\r
+import{D as Q}from"./deviceController-a85H8M6T.js";import{g as S,r as b,a as I,o as Z,e as v,s as w,b as u,c as j,d as Y,f as J,h as V,u as K,i as z,j as X}from"./index-Cfdlob0H.js";const ee=`\r
  <!-- Vista Puerta Motorizada -->\r
 <div class="device-container fade-in">\r
 \r
