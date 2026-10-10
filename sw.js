@@ -77,8 +77,8 @@ try {
   self["workbox:precaching:7.4.0"] && _();
 } catch {
 }
-const Ot = "__WB_REVISION__";
-function Nt(t) {
+const Nt = "__WB_REVISION__";
+function Ot(t) {
   if (!t)
     throw new f("add-to-cache-list-unexpected-type", { entry: t });
   if (typeof t == "string") {
@@ -99,7 +99,7 @@ function Nt(t) {
     };
   }
   const r = new URL(n, location.href), s = new URL(n, location.href);
-  return r.searchParams.set(Ot, e), {
+  return r.searchParams.set(Nt, e), {
     cacheKey: r.href,
     url: s.href
   };
@@ -776,7 +776,7 @@ class Vt {
     const n = [];
     for (const r of e) {
       typeof r == "string" ? n.push(r) : r && r.revision === void 0 && n.push(r.url);
-      const { cacheKey: s, url: i } = Nt(r), a = typeof r != "string" && r.revision ? "reload" : "default";
+      const { cacheKey: s, url: i } = Ot(r), a = typeof r != "string" && r.revision ? "reload" : "default";
       if (this._urlsToCacheKeys.has(i) && this._urlsToCacheKeys.get(i) !== s)
         throw new f("add-to-cache-list-conflicting-entries", {
           firstEntry: this._urlsToCacheKeys.get(i),
@@ -1375,8 +1375,8 @@ const Ve = function(t) {
     const n = e ? this.byteToCharMapWebSafe_ : this.byteToCharMap_, r = [];
     for (let s = 0; s < t.length; s += 3) {
       const i = t[s], a = s + 1 < t.length, o = a ? t[s + 1] : 0, c = s + 2 < t.length, l = c ? t[s + 2] : 0, u = i >> 2, d = (i & 3) << 4 | o >> 4;
-      let y = (o & 15) << 2 | l >> 6, I = l & 63;
-      c || (I = 64, a || (y = 64)), r.push(n[u], n[d], n[y], n[I]);
+      let y = (o & 15) << 2 | l >> 6, S = l & 63;
+      c || (S = 64, a || (y = 64)), r.push(n[u], n[d], n[y], n[S]);
     }
     return r.join("");
   },
@@ -1430,8 +1430,8 @@ const Ve = function(t) {
         throw new cn();
       const y = i << 2 | o >> 4;
       if (r.push(y), l !== 64) {
-        const I = o << 4 & 240 | l >> 2;
-        if (r.push(I), d !== 64) {
+        const S = o << 4 & 240 | l >> 2;
+        if (r.push(S), d !== 64) {
           const Tt = l << 6 & 192 | d;
           r.push(Tt);
         }
@@ -1617,9 +1617,9 @@ function Ye() {
  * limitations under the License.
  */
 const bn = "FirebaseError";
-class N extends Error {
+class O extends Error {
   constructor(e, n, r) {
-    super(n), this.code = e, this.customData = r, this.name = bn, Object.setPrototypeOf(this, N.prototype), Error.captureStackTrace && Error.captureStackTrace(this, q.prototype.create);
+    super(n), this.code = e, this.customData = r, this.name = bn, Object.setPrototypeOf(this, O.prototype), Error.captureStackTrace && Error.captureStackTrace(this, q.prototype.create);
   }
 }
 class q {
@@ -1628,7 +1628,7 @@ class q {
   }
   create(e, ...n) {
     const r = n[0] || {}, s = `${this.service}/${e}`, i = this.errors[e], a = i ? wn(i, r) : "Error", o = `${this.serviceName}: ${a} (${s}).`;
-    return new N(s, o, r);
+    return new O(s, o, r);
   }
 }
 function wn(t, e) {
@@ -1718,7 +1718,7 @@ class T {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const S = "[DEFAULT]";
+const I = "[DEFAULT]";
 /**
  * @license
  * Copyright 2019 Google LLC
@@ -1788,7 +1788,7 @@ class _n {
     if (this.component = e, !!this.shouldAutoInitialize()) {
       if (En(e))
         try {
-          this.getOrInitializeService({ instanceIdentifier: S });
+          this.getOrInitializeService({ instanceIdentifier: I });
         } catch {
         }
       for (const [n, r] of this.instancesDeferred.entries()) {
@@ -1803,7 +1803,7 @@ class _n {
       }
     }
   }
-  clearInstance(e = S) {
+  clearInstance(e = I) {
     this.instancesDeferred.delete(e), this.instancesOptions.delete(e), this.instances.delete(e);
   }
   // app.delete() will call this method on every provider to delete the services
@@ -1818,10 +1818,10 @@ class _n {
   isComponentSet() {
     return this.component != null;
   }
-  isInitialized(e = S) {
+  isInitialized(e = I) {
     return this.instances.has(e);
   }
-  getOptions(e = S) {
+  getOptions(e = I) {
     return this.instancesOptions.get(e) || {};
   }
   initialize(e = {}) {
@@ -1882,15 +1882,15 @@ class _n {
       }
     return r || null;
   }
-  normalizeInstanceIdentifier(e = S) {
-    return this.component ? this.component.multipleInstances ? e : S : e;
+  normalizeInstanceIdentifier(e = I) {
+    return this.component ? this.component.multipleInstances ? e : I : e;
   }
   shouldAutoInitialize() {
     return !!this.component && this.component.instantiationMode !== "EXPLICIT";
   }
 }
 function vn(t) {
-  return t === S ? void 0 : t;
+  return t === I ? void 0 : t;
 }
 function En(t) {
   return t.instantiationMode === "EAGER";
@@ -1911,7 +1911,7 @@ function En(t) {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-class In {
+class Sn {
   constructor(e) {
     this.name = e, this.providers = /* @__PURE__ */ new Map();
   }
@@ -1970,7 +1970,7 @@ var h;
 (function(t) {
   t[t.DEBUG = 0] = "DEBUG", t[t.VERBOSE = 1] = "VERBOSE", t[t.INFO = 2] = "INFO", t[t.WARN = 3] = "WARN", t[t.ERROR = 4] = "ERROR", t[t.SILENT = 5] = "SILENT";
 })(h || (h = {}));
-const Sn = {
+const In = {
   debug: h.DEBUG,
   verbose: h.VERBOSE,
   info: h.INFO,
@@ -2012,7 +2012,7 @@ class An {
   }
   // Workaround for setter/getter having to be the same type.
   setLogLevel(e) {
-    this._logLevel = typeof e == "string" ? Sn[e] : e;
+    this._logLevel = typeof e == "string" ? In[e] : e;
   }
   get logHandler() {
     return this._logHandler;
@@ -2048,7 +2048,7 @@ class An {
   }
 }
 const Dn = (t, e) => e.some((n) => t instanceof n);
-let Re, Oe;
+let Re, Ne;
 function Rn() {
   return Re || (Re = [
     IDBDatabase,
@@ -2058,15 +2058,15 @@ function Rn() {
     IDBTransaction
   ]);
 }
-function On() {
-  return Oe || (Oe = [
+function Nn() {
+  return Ne || (Ne = [
     IDBCursor.prototype.advance,
     IDBCursor.prototype.continue,
     IDBCursor.prototype.continuePrimaryKey
   ]);
 }
 const Qe = /* @__PURE__ */ new WeakMap(), le = /* @__PURE__ */ new WeakMap(), Ze = /* @__PURE__ */ new WeakMap(), Q = /* @__PURE__ */ new WeakMap(), ge = /* @__PURE__ */ new WeakMap();
-function Nn(t) {
+function On(t) {
   const e = new Promise((n, r) => {
     const s = () => {
       t.removeEventListener("success", i), t.removeEventListener("error", a);
@@ -2123,7 +2123,7 @@ function Ln(t) {
   return t === IDBDatabase.prototype.transaction && !("objectStoreNames" in IDBTransaction.prototype) ? function(e, ...n) {
     const r = t.call(Z(this), e, ...n);
     return Ze.set(r, e.sort ? e.sort() : [e]), b(r);
-  } : On().includes(t) ? function(...e) {
+  } : Nn().includes(t) ? function(...e) {
     return t.apply(Z(this), e), b(Qe.get(this));
   } : function(...e) {
     return b(t.apply(Z(this), e));
@@ -2134,7 +2134,7 @@ function Bn(t) {
 }
 function b(t) {
   if (t instanceof IDBRequest)
-    return Nn(t);
+    return On(t);
   if (Q.has(t))
     return Q.get(t);
   const e = Bn(t);
@@ -2165,7 +2165,7 @@ function ee(t, { blocked: e } = {}) {
   });
 }
 const $n = ["get", "getKey", "getAll", "getAllKeys", "count"], xn = ["put", "add", "delete", "clear"], te = /* @__PURE__ */ new Map();
-function Ne(t, e) {
+function Oe(t, e) {
   if (!(t instanceof IDBDatabase && !(e in t) && typeof e == "string"))
     return;
   if (te.get(e))
@@ -2188,8 +2188,8 @@ function Ne(t, e) {
 }
 Pn((t) => ({
   ...t,
-  get: (e, n, r) => Ne(e, n) || t.get(e, n, r),
-  has: (e, n) => !!Ne(e, n) || t.has(e, n)
+  get: (e, n, r) => Oe(e, n) || t.get(e, n, r),
+  has: (e, n) => !!Oe(e, n) || t.has(e, n)
 }));
 /**
  * @license
@@ -2315,7 +2315,7 @@ function Pe(t, e) {
     w.debug(`Component ${e.name} failed to register with FirebaseApp ${t.name}`, n);
   }
 }
-function O(t) {
+function N(t) {
   const e = t.name;
   if (fe.has(e))
     return w.debug(`There were multiple attempts to register component ${e}.`), !1;
@@ -2439,7 +2439,7 @@ function et(t, e = {}) {
       return i;
     throw E.create("duplicate-app", { appName: s });
   }
-  const a = new In(s);
+  const a = new Sn(s);
   for (const c of fe.values())
     a.addComponent(c);
   const o = new mr(n, r, a);
@@ -2465,7 +2465,7 @@ function R(t, e, n) {
     i && o.push(`library name "${s}" contains illegal characters (whitespace or "/")`), i && a && o.push("and"), a && o.push(`version name "${e}" contains illegal characters (whitespace or "/")`), w.warn(o.join(" "));
     return;
   }
-  O(new T(
+  N(new T(
     `${s}-version`,
     () => ({ library: s, version: e }),
     "VERSION"
@@ -2513,7 +2513,7 @@ async function _r(t) {
     const n = (await tt()).transaction(B), r = await n.objectStore(B).get(nt(t));
     return await n.done, r;
   } catch (e) {
-    if (e instanceof N)
+    if (e instanceof O)
       w.warn(e.message);
     else {
       const n = E.create("idb-get", {
@@ -2528,7 +2528,7 @@ async function Le(t, e) {
     const r = (await tt()).transaction(B, "readwrite");
     await r.objectStore(B).put(e, nt(t)), await r.done;
   } catch (n) {
-    if (n instanceof N)
+    if (n instanceof O)
       w.warn(n.message);
     else {
       const r = E.create("idb-set", {
@@ -2558,7 +2558,7 @@ function nt(t) {
  * limitations under the License.
  */
 const vr = 1024, Er = 30 * 24 * 60 * 60 * 1e3;
-class Ir {
+class Sr {
   constructor(e) {
     this.container = e, this._heartbeatsCache = null;
     const n = this.container.getProvider("app").getImmediate();
@@ -2595,7 +2595,7 @@ class Ir {
     try {
       if (this._heartbeatsCache === null && await this._heartbeatsCachePromise, ((e = this._heartbeatsCache) === null || e === void 0 ? void 0 : e.heartbeats) == null || this._heartbeatsCache.heartbeats.length === 0)
         return "";
-      const n = Be(), { heartbeatsToSend: r, unsentEntries: s } = Sr(this._heartbeatsCache.heartbeats), i = ze(JSON.stringify({ version: 2, heartbeats: r }));
+      const n = Be(), { heartbeatsToSend: r, unsentEntries: s } = Ir(this._heartbeatsCache.heartbeats), i = ze(JSON.stringify({ version: 2, heartbeats: r }));
       return this._heartbeatsCache.lastSentHeartbeatDate = n, s.length > 0 ? (this._heartbeatsCache.heartbeats = s, await this._storage.overwrite(this._heartbeatsCache)) : (this._heartbeatsCache.heartbeats = [], this._storage.overwrite(this._heartbeatsCache)), i;
     } catch (n) {
       return w.warn(n), "";
@@ -2605,7 +2605,7 @@ class Ir {
 function Be() {
   return (/* @__PURE__ */ new Date()).toISOString().substring(0, 10);
 }
-function Sr(t, e = vr) {
+function Ir(t, e = vr) {
   const n = [];
   let r = t.slice();
   for (const s of t) {
@@ -2697,14 +2697,14 @@ function $e(t) {
  * limitations under the License.
  */
 function Tr(t) {
-  O(new T(
+  N(new T(
     "platform-logger",
     (e) => new Un(e),
     "PRIVATE"
     /* ComponentType.PRIVATE */
-  )), O(new T(
+  )), N(new T(
     "heartbeat",
-    (e) => new Ir(e),
+    (e) => new Sr(e),
     "PRIVATE"
     /* ComponentType.PRIVATE */
   )), R(he, Me, t), R(he, Me, "esm2017"), R("fire-js", "");
@@ -2745,7 +2745,7 @@ const rt = "@firebase/installations", be = "0.6.9";
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const st = 1e4, it = `w:${be}`, at = "FIS_v2", Dr = "https://firebaseinstallations.googleapis.com/v1", Rr = 60 * 60 * 1e3, Or = "installations", Nr = "Installations";
+const st = 1e4, it = `w:${be}`, at = "FIS_v2", Dr = "https://firebaseinstallations.googleapis.com/v1", Rr = 60 * 60 * 1e3, Nr = "installations", Or = "Installations";
 /**
  * @license
  * Copyright 2019 Google LLC
@@ -2769,9 +2769,9 @@ const Mr = {
   "request-failed": '{$requestName} request failed with error "{$serverCode} {$serverStatus}: {$serverMessage}"',
   "app-offline": "Could not process request. Application offline.",
   "delete-pending-registration": "Can't delete installation while there is a pending registration request."
-}, k = new q(Or, Nr, Mr);
+}, k = new q(Nr, Or, Mr);
 function ot(t) {
-  return t instanceof N && t.code.includes(
+  return t instanceof O && t.code.includes(
     "request-failed"
     /* ErrorCode.REQUEST_FAILED */
   );
@@ -3406,12 +3406,12 @@ const _t = "installations", us = "installations-internal", hs = (t) => {
   };
 };
 function fs() {
-  O(new T(
+  N(new T(
     _t,
     hs,
     "PUBLIC"
     /* ComponentType.PUBLIC */
-  )), O(new T(
+  )), N(new T(
     us,
     ds,
     "PRIVATE"
@@ -3582,10 +3582,10 @@ function vs(t) {
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const Es = "firebase-messaging-database", Is = 1, D = "firebase-messaging-store";
+const Es = "firebase-messaging-database", Ss = 1, D = "firebase-messaging-store";
 let ae = null;
 function ve() {
-  return ae || (ae = z(Es, Is, {
+  return ae || (ae = z(Es, Ss, {
     upgrade: (t, e) => {
       switch (e) {
         case 0:
@@ -3595,24 +3595,24 @@ function ve() {
   })), ae;
 }
 async function Ee(t) {
-  const e = Se(t), r = await (await ve()).transaction(D).objectStore(D).get(e);
+  const e = Ie(t), r = await (await ve()).transaction(D).objectStore(D).get(e);
   if (r)
     return r;
   {
     const s = await _s(t.appConfig.senderId);
     if (s)
-      return await Ie(t, s), s;
+      return await Se(t, s), s;
   }
 }
-async function Ie(t, e) {
-  const n = Se(t), s = (await ve()).transaction(D, "readwrite");
+async function Se(t, e) {
+  const n = Ie(t), s = (await ve()).transaction(D, "readwrite");
   return await s.objectStore(D).put(e, n), await s.done, e;
 }
-async function Ss(t) {
-  const e = Se(t), r = (await ve()).transaction(D, "readwrite");
+async function Is(t) {
+  const e = Ie(t), r = (await ve()).transaction(D, "readwrite");
   await r.objectStore(D).delete(e), await r.done;
 }
-function Se({ appConfig: t }) {
+function Ie({ appConfig: t }) {
   return t.appId;
 }
 /**
@@ -3668,7 +3668,7 @@ const Cs = {
  * limitations under the License.
  */
 async function Ts(t, e) {
-  const n = await Te(t), r = St(e), s = {
+  const n = await Te(t), r = It(e), s = {
     method: "POST",
     headers: n,
     body: JSON.stringify(r)
@@ -3695,7 +3695,7 @@ async function Ts(t, e) {
   return i.token;
 }
 async function ks(t, e) {
-  const n = await Te(t), r = St(e.subscriptionOptions), s = {
+  const n = await Te(t), r = It(e.subscriptionOptions), s = {
     method: "PATCH",
     headers: n,
     body: JSON.stringify(r)
@@ -3721,7 +3721,7 @@ async function ks(t, e) {
     );
   return i.token;
 }
-async function It(t, e) {
+async function St(t, e) {
   const r = {
     method: "DELETE",
     headers: await Te(t)
@@ -3752,7 +3752,7 @@ async function Te({ appConfig: t, installations: e }) {
     "x-goog-firebase-installations-auth": `FIS ${n}`
   });
 }
-function St({ p256dh: t, auth: e, endpoint: n, vapidKey: r }) {
+function It({ p256dh: t, auth: e, endpoint: n, vapidKey: r }) {
   const s = {
     web: {
       endpoint: n,
@@ -3780,7 +3780,7 @@ function St({ p256dh: t, auth: e, endpoint: n, vapidKey: r }) {
  */
 const As = 7 * 24 * 60 * 60 * 1e3;
 async function Ds(t) {
-  const e = await Os(t.swRegistration, t.vapidKey), n = {
+  const e = await Ns(t.swRegistration, t.vapidKey), n = {
     vapidKey: t.vapidKey,
     swScope: t.swRegistration.scope,
     endpoint: e.endpoint,
@@ -3788,14 +3788,14 @@ async function Ds(t) {
     p256dh: g(e.getKey("p256dh"))
   }, r = await Ee(t.firebaseDependencies);
   if (r) {
-    if (Ns(r.subscriptionOptions, n))
+    if (Os(r.subscriptionOptions, n))
       return Date.now() >= r.createTime + As ? Rs(t, {
         token: r.token,
         createTime: Date.now(),
         subscriptionOptions: n
       }) : r.token;
     try {
-      await It(t.firebaseDependencies, r.token);
+      await St(t.firebaseDependencies, r.token);
     } catch (s) {
       console.warn(s);
     }
@@ -3804,14 +3804,14 @@ async function Ds(t) {
 }
 async function je(t) {
   const e = await Ee(t.firebaseDependencies);
-  e && (await It(t.firebaseDependencies, e.token), await Ss(t.firebaseDependencies));
+  e && (await St(t.firebaseDependencies, e.token), await Is(t.firebaseDependencies));
   const n = await t.swRegistration.pushManager.getSubscription();
   return n ? n.unsubscribe() : !0;
 }
 async function Rs(t, e) {
   try {
     const n = await ks(t.firebaseDependencies, e), r = Object.assign(Object.assign({}, e), { token: n, createTime: Date.now() });
-    return await Ie(t.firebaseDependencies, r), n;
+    return await Se(t.firebaseDependencies, r), n;
   } catch (n) {
     throw n;
   }
@@ -3822,9 +3822,9 @@ async function He(t, e) {
     createTime: Date.now(),
     subscriptionOptions: e
   };
-  return await Ie(t, r), r.token;
+  return await Se(t, r), r.token;
 }
-async function Os(t, e) {
+async function Ns(t, e) {
   const n = await t.pushManager.getSubscription();
   return n || t.pushManager.subscribe({
     userVisibleOnly: !0,
@@ -3833,7 +3833,7 @@ async function Os(t, e) {
     applicationServerKey: ws(e)
   });
 }
-function Ns(t, e) {
+function Os(t, e) {
   const n = e.vapidKey === t.vapidKey, r = e.endpoint === t.endpoint, s = e.auth === t.auth, i = e.p256dh === t.p256dh;
   return n && r && s && i;
 }
@@ -4166,7 +4166,7 @@ const ti = (t) => {
   }), e;
 };
 function ni() {
-  O(new T(
+  N(new T(
     "messaging-sw",
     ti,
     "PUBLIC"
@@ -4323,7 +4323,7 @@ function ci(t, e = t.siteName, n = t.sentTime) {
       c = `📩 Evento ${t.E || "nuevo"}`, l = `Partición ${r} • ${a}`;
   }
   r == 9 && (l = l.replace("Partición", "Global"));
-  const d = li(String(t.F || "").trim() || n);
+  const d = ui(String(t.F || "").trim() || n);
   return {
     title: String(e || (t.S ? `Sitio ${t.S}` : "ProtexHome")).trim() || "ProtexHome",
     body: [c, l, d].filter(Boolean).join(" • "),
@@ -4331,6 +4331,15 @@ function ci(t, e = t.siteName, n = t.sentTime) {
   };
 }
 function li(t) {
+  const e = Number(t.E), n = Number(t.T), r = t.T !== void 0 && t.T !== null && String(t.T).trim() !== "" && Number.isFinite(n);
+  let s = !1;
+  return !r || [3, 4, 5].includes(n) ? s = e === 1 || e === 7 : n === 1 ? s = e === 3 : n === 2 && (s = e === 6), {
+    category: s ? "alarm" : "activity",
+    tag: `protexhome-${String(t.S || "unknown")}`,
+    vibrate: s ? [500, 150, 500, 150, 800] : [150, 80, 150]
+  };
+}
+function ui(t) {
   const e = String(t ?? "").trim();
   if (e) {
     const n = e.match(/(?:^|\s)(\d{1,2}:\d{2}(?::\d{2})?)(?:\s|$)/);
@@ -4348,18 +4357,18 @@ function li(t) {
     hour12: !1
   }).format(/* @__PURE__ */ new Date());
 }
-const ui = "protexhome-notification-sites", K = "sites";
-function hi() {
+const hi = "protexhome-notification-sites", K = "sites";
+function di() {
   return new Promise((t, e) => {
-    const n = indexedDB.open(ui, 1);
+    const n = indexedDB.open(hi, 1);
     n.onupgradeneeded = () => {
       n.result.objectStoreNames.contains(K) || n.result.createObjectStore(K, { keyPath: "serial" });
     }, n.onsuccess = () => t(n.result), n.onerror = () => e(n.error || new Error("No se pudo abrir la base local de notificaciones")), n.onblocked = () => e(new Error("La base local de notificaciones está bloqueada por otra pestaña"));
   });
 }
-async function di(t) {
+async function fi(t) {
   if (!t) return "";
-  const e = await hi();
+  const e = await di();
   try {
     return await new Promise((n, r) => {
       const i = e.transaction(K, "readonly").objectStore(K).get(String(t));
@@ -4375,36 +4384,36 @@ async function di(t) {
 const W = "/ProtexHome/";
 self.skipWaiting();
 an();
-sn([{"revision":"d7a7b60448d2ccd317f22c2933b9e9c1","url":"manifest.json"},{"revision":"9b187a753bd47a2c618549c75a4df799","url":"index.html"},{"revision":null,"url":"assets/workbox-window.prod.es5-BqEJf4Xk.js"},{"revision":null,"url":"assets/protexhome-apple-touch-icon.png"},{"revision":null,"url":"assets/index-DlAifJ3e.css"},{"revision":null,"url":"assets/index-Cfdlob0H.js"},{"revision":null,"url":"assets/favicon.svg"},{"revision":null,"url":"assets/doorViewController-BQ4CIpAM.js"},{"revision":null,"url":"assets/deviceController-a85H8M6T.js"},{"revision":null,"url":"assets/alarmDscViewController-Cm5yyiIO.js"},{"revision":null,"url":"assets/alarm.mp3"},{"revision":"6304384f6c4aef204a00482c37505a73","url":"assets/protexhome-icon-192.png"},{"revision":"76491c4ac3bc8429d729774c040c31dc","url":"assets/protexhome-icon-512.png"},{"revision":"d7a7b60448d2ccd317f22c2933b9e9c1","url":"manifest.json"}] || []);
+sn([{"revision":"d7a7b60448d2ccd317f22c2933b9e9c1","url":"manifest.json"},{"revision":"06579ff7f16c0da0944c69033a060049","url":"index.html"},{"revision":null,"url":"assets/workbox-window.prod.es5-BqEJf4Xk.js"},{"revision":null,"url":"assets/protexhome-apple-touch-icon.png"},{"revision":null,"url":"assets/index-DlAifJ3e.css"},{"revision":null,"url":"assets/index-CATH8Y0y.js"},{"revision":null,"url":"assets/favicon.svg"},{"revision":null,"url":"assets/doorViewController-BzKfEMYC.js"},{"revision":null,"url":"assets/deviceController-D9suZebR.js"},{"revision":null,"url":"assets/alarmDscViewController-GZoAh4uM.js"},{"revision":null,"url":"assets/alarm.mp3"},{"revision":"6304384f6c4aef204a00482c37505a73","url":"assets/protexhome-icon-192.png"},{"revision":"76491c4ac3bc8429d729774c040c31dc","url":"assets/protexhome-icon-512.png"},{"revision":"d7a7b60448d2ccd317f22c2933b9e9c1","url":"manifest.json"}] || []);
 nn();
 console.log("✅ SW: Workbox inicializado");
-const fi = et(oi), pi = ii(fi);
+const pi = et(oi), gi = ii(pi);
 console.log("✅ SW: Firebase Messaging inicializado");
-ai(pi, async (t) => {
-  var a, o;
+ai(gi, async (t) => {
+  var o, c;
   console.log("📩 SW: mensaje FCM recibido", t);
   const e = t.data || {};
   let n = "";
   try {
-    n = await di(e.S);
-  } catch (c) {
-    console.error("❌ SW: no se pudo recuperar el nombre del sitio:", c);
+    n = await fi(e.S);
+  } catch (l) {
+    console.error("❌ SW: no se pudo recuperar el nombre del sitio:", l);
   }
   const r = e.E !== void 0 ? ci(e, n || e.siteName, t.sentTime) : {
-    title: e.title || ((a = t.notification) == null ? void 0 : a.title) || "ProtexHome",
-    body: e.body || ((o = t.notification) == null ? void 0 : o.body) || "Nuevo evento",
+    title: e.title || ((o = t.notification) == null ? void 0 : o.title) || "ProtexHome",
+    body: e.body || ((c = t.notification) == null ? void 0 : c.body) || "Nuevo evento",
     color: "#087e8b"
-  }, s = e.S || "unknown", i = {
+  }, s = e.S || "unknown", i = li(e), a = {
     body: r.body,
     icon: `${W}assets/protexhome-icon-512.png`,
     badge: `${W}assets/protexhome-icon-192.png`,
-    tag: `protexhome-${s}`,
+    tag: i.tag,
     renotify: !0,
     requireInteraction: !0,
-    vibrate: [200, 100, 200],
-    data: { payload: e, serial: s }
+    vibrate: i.vibrate,
+    data: { payload: e, serial: s, category: i.category }
   };
-  return "color" in Notification.prototype && (i.color = r.color), console.log("🔔 SW: mostrando notificación:", r.title, r.body), self.registration.showNotification(r.title, i).then(() => console.log("✅ SW: notificación mostrada")).catch((c) => console.error("❌ SW: showNotification error:", c));
+  return "color" in Notification.prototype && (a.color = r.color), console.log("🔔 SW: mostrando notificación:", r.title, r.body), self.registration.showNotification(r.title, a).then(() => console.log("✅ SW: notificación mostrada")).catch((l) => console.error("❌ SW: showNotification error:", l));
 });
 self.addEventListener("notificationclick", (t) => {
   var r;
